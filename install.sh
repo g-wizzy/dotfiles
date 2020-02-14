@@ -6,4 +6,5 @@ dir=~/dotfiles
 ln -s $dir/vimrc ~/.vimrc
 
 #Install bash profile
-ln -s $ir/profile ~/.profile
+ln -s $dir/profile ~/.profile
+# TODO: add zshrc
