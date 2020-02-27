@@ -31,8 +31,9 @@ if [ -d "$HOME/scripts" ] ; then
     PATH="$HOME/scripts:$PATH"
 fi
 
-# add cuda server address
-CUDA=157.26.103.173
+# add npm
+export PATH=/usr/local/lib/nodejs/bin:$PATH
 
-# dope aliases
-alias ls='ls -l --color=auto'
+# add cuda server address
+export CUDA=157.26.103.173
+
