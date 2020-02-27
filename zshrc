@@ -107,8 +107,8 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
-alias qtileconfig="vim ~/.config/qtile/config.py"
+alias zshconfig="vim ~/dotfiles/zshrc"
+alias qtileconfig="vim ~/dotfiles/qtile/config.py"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ls='ls --color=tty --group-directories-first'
