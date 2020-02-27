@@ -50,3 +50,6 @@ set autowrite		" Automatically save before commands like :next and :make
 set hidden		" Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
 set number		" Enable line numbering
+
+" fzf integration
+source /usr/share/doc/fzf/examples/fzf.vim
