@@ -32,6 +32,52 @@ from typing import List  # noqa: F401
 
 mod = "mod4"
 
+def resize(qtile, direction):
+    layout = qtile.current_layout
+    child = layout.current
+    parent = child.parent
+
+    while parent:
+        if child in parent.children:
+            layout_all = False
+
+            if (direction == "left" and parent.split_horizontal) or (direction == "up" and not parent.split_horizontal):
+                parent.split_ratio = max(5, parent.split_ratio - layout.grow_amount)
+                layout_all = True
+            elif (direction == "right" and parent.split_horizontal) or (direction == "down" and not parent.split_horizontal):
+                parent.split_ratio = min(95, parent.split_ratio + layout.grow_amount)
+                layout_all = True
+
+            if layout_all:
+                layout.group.layout_all()
+                break
+
+        child = parent
+        parent = child.parent
+
+@lazy.function
+def resize_left(qtile):
+    resize(qtile, "left")
+
+@lazy.function
+def resize_right(qtile):
+    resize(qtile, "right")
+
+@lazy.function
+def resize_up(qtile):
+    resize(qtile, "up")
+
+@lazy.function
+def resize_down(qtile):
+    resize(qtile, "down")
+
+@lazy.function
+def float_to_front(qtile):
+    for group in qtile.groups:
+        for window in group.windows:
+            if window.floating:
+                window.cmd_bring_to_front()
+
 keys = [
     # Layout change
     Key("M-<Tab>", lazy.next_layout()),
@@ -53,14 +99,17 @@ keys = [
     Key("M-A-h", lazy.layout.flip_left()),
     Key("M-A-l", lazy.layout.flip_right()),
     # Resize window
-    Key("M-C-j", lazy.layout.grow_down()),
-    Key("M-C-k", lazy.layout.grow_up()),
-    Key("M-C-h", lazy.layout.grow_left()),
-    Key("M-C-l", lazy.layout.grow_right()),
+    Key("M-C-j", resize_down),
+    Key("M-C-k", resize_up),
+    Key("M-C-h", resize_left),
+    Key("M-C-l", resize_right),
     # Reset
     Key("M-S-n", lazy.layout.normalize()),
     # Toggle split
     Key("M-<space>", lazy.layout.toggle_split()),
+
+    # Bring floating windows to the front
+    Key("A-<Tab>", float_to_front),
     
     # Programs shortcuts
     Key("M-<Return>", lazy.spawn("gnome-terminal")),
@@ -156,7 +205,7 @@ bar_widgets = [
     widget.GroupBox(**widget_defaults),
     widget.WindowName(**widget_defaults),
 
-    widget.Clock(**widget_defaults, format='%Y-%m-%d %a %H:%M:%S'),
+    widget.Clock(**widget_defaults, format='%H:%M:%S %a %d.%m.%Y'),
     widget.Spacer(length=128),
 
     widget.Systray(**widget_defaults, icon_size=24),
