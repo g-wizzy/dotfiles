@@ -77,6 +77,7 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
+	extract
 	colored-man-pages
 	virtualenv
 	vscode	
@@ -113,3 +114,4 @@ alias qtileconfig="vim ~/dotfiles/qtile/config.py"
 
 alias ls='ls --color=tty --group-directories-first'
 
+alias python='python3'

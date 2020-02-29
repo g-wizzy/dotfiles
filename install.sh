@@ -9,7 +9,7 @@ ln -s $dir/vimrc ~/.vimrc
 ln -s $dir/profile ~/.profile
 
 #Install zsh profile
-ln -s $dir/zshrc ~/.profile
+ln -s $dir/zshrc ~/.zshrc
 
 #Install qtile config
 mkdir -p ~/.config/qtile
