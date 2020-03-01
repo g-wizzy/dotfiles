@@ -108,13 +108,13 @@ keys = [
     # Toggle split
     Key("M-<space>", lazy.layout.toggle_split()),
 
-    # Bring floating windows to the front
-    Key("A-<Tab>", float_to_front),
-    
     # Programs shortcuts
     Key("M-<Return>", lazy.spawn("gnome-terminal")),
-    Key("M-r", lazy.spawn("ulauncher")),
     Key("M-e", lazy.spawn("nautilus")),
+
+    Key("M-r", lazy.spawn("rofi -show run")),
+    Key("A-<Tab>", lazy.spawn("rofi -show window")),
+
     Key("M-f", lazy.spawn("firefox")),
     Key("M-S-f", lazy.spawn("firefox --private-window")),
 
