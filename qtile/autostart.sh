@@ -12,3 +12,6 @@ compton &
 
 # Network applet
 nm-applet &
+
+# Cheap fix for unity hub
+~/Applications/UnityHub*.AppImage
