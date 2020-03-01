@@ -158,7 +158,7 @@ for i in groups:
     ])
 
 layout_defaults = dict(
-    margin = 5,
+    margin = 15,
     border_width=2,
     border_focus="#FFFFFF",
     )
