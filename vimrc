@@ -51,3 +51,19 @@ set hidden		" Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
 set number		" Enable line numbering
 
+" Key mappings
+
+" Fix <A-x> type shortcuts
+for i in range(97, 122)
+	let c = nr2char(i)
+	exec "map \e".c." <M-".c.">"
+	exec "map! \e".c." <M-".c.">"
+endfor
+
+" Add line moving shortcuts
+nnoremap <A-j> :m+1<CR>==
+nnoremap <A-k> :m-2<CR>==
+inoremap <A-j> <Esc>:m+1<CR>==g1
+inoremap <A-k> <Esc>:m-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
