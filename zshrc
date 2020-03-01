@@ -19,10 +19,6 @@ ZSH_THEME="agnoster"
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Add fzf integration
-
-source /usr/share/doc/fzf/examples/key-bindings.zsh
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -115,3 +111,5 @@ alias qtileconfig="vim ~/dotfiles/qtile/config.py"
 alias ls='ls --color=tty --group-directories-first'
 
 alias python='python3'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
