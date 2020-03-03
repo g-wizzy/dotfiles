@@ -31,9 +31,8 @@ if [ -d "$HOME/scripts" ] ; then
     PATH="$HOME/scripts:$PATH"
 fi
 
-# add npm
-export PATH=/usr/local/lib/nodejs/bin:$PATH
-
 # add cuda server address
 export CUDA=157.26.103.173
 
+# Compton config
+export XDG_CONFIG_HOME="/home/pierre/.config"
