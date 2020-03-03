@@ -15,3 +15,6 @@ ln -s $dir/zshrc ~/.zshrc
 mkdir -p ~/.config/qtile
 ln -s $dir/qtile/config.py ~/.config/qtile/config.py
 ln -s $dir/qtile/autostart.sh ~/.config/qtile/autostart.sh
+
+#Install compton configuration
+ln -s $dir/compton.conf ~/.config/compton.conf
