@@ -114,7 +114,7 @@ keys = [
     Key("M-<Return>", lazy.spawn("gnome-terminal")),
     Key("M-e", lazy.spawn("nautilus")),
 
-    Key("M-r", lazy.spawn("rofi -show run")),
+    Key("M-r", lazy.spawn("albert show")),
     Key("A-<Tab>", lazy.spawn("rofi -show window")),
 
     Key("M-f", lazy.spawn("firefox")),
@@ -169,8 +169,9 @@ for i in groups:
 
 layout_defaults = dict(
     margin = 15,
-    border_width=2,
+    border_width = 3,
     border_focus="#FFFFFF",
+    grow_amount = 5,
     )
 
 floating_layout_defaults = layout_defaults.copy()
@@ -291,13 +292,23 @@ wmname = "LG3D"
 import subprocess
 from libqtile import hook
 
-wallpaper_path = "/home/pierre/Pictures/Wallpapers/glitch.png"
+wallpaper_path = "/home/pierre/Pictures/Wallpapers/proteus.jpg"
 subprocess.call(["feh", "--bg-fill", wallpaper_path]) 
 
 @hook.subscribe.startup_once
 def autostart():
     subprocess.call(["/home/pierre/.config/qtile/autostart.sh"])
 
+
+@hook.subscribe.client_new
+def albert_open(window):
+    if window.name == "Albert":
+        window.cmd_togroup()
+
+@hook.subscribe.client_focus
+def floating_focus(window):
+    if window.floating:
+        window.cmd_bring_to_front()
 
 # Gnome integration
 import os
