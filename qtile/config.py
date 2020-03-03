@@ -30,6 +30,8 @@ from libqtile import layout, bar, widget
 
 from typing import List  # noqa: F401
 
+from datetime import datetime as time
+
 mod = "mod4"
 
 def resize(qtile, direction):
@@ -117,6 +119,14 @@ keys = [
 
     Key("M-f", lazy.spawn("firefox")),
     Key("M-S-f", lazy.spawn("firefox --private-window")),
+
+    Key("<XF86Calculator>", lazy.spawn("gnome-calculator")),
+    
+    # Screen capture (Shift => selection, Ctrl => to clipboard)
+    Key("<Print>", lazy.spawn(f"maim /home/pierre/Pictures/{time.now().isoformat()}.png")),
+    Key("C-<Print>", lazy.spawn("maim_to_clip")),
+    Key("S-<Print>", lazy.spawn(f"maim -s /home/pierre/Pictures/{time.now().isoformat()}.png")),
+    Key("C-S-<Print>", lazy.spawn("maim_to_clip -s")),
 
     Key("M-w", lazy.window.kill()),
     Key("M-C-r", lazy.restart()),
