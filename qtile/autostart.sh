@@ -9,6 +9,3 @@ nm-applet &
 
 # Albert launcher
 albert &
-
-# Cheap fix for unity hub
-~/Applications/UnityHub*.AppImage &
