@@ -9,3 +9,6 @@ nm-applet &
 
 # Albert launcher
 albert &
+
+# Wallpaper
+feh --bg-fill /home/pierre/Pictures/Wallpapers/proteus.jpg &
