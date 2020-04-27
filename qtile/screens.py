@@ -3,15 +3,17 @@ from libqtile import widget, bar
 
 from Xlib import display as xdisplay
 
-primary_color = '1d1f21'
-secondary_color = 'c5c8c6'
+primary_color = '1c2023'
+secondary_color = '747c84'
 
 color_schemes = [dict(
     background = primary_color,
-    foreground = secondary_color
+    arrow_color = secondary_color,
+    foreground = 'ffffff'
 ), dict(
     background = secondary_color,
-    foreground = primary_color
+    arrow_color = primary_color,
+    foreground = 'ffffff'
 )]
 
 color_scheme = color_schemes[0]
@@ -25,13 +27,15 @@ def separator(right_looking = True):
         return widget.TextBox(
             u'\ue0b0', 
             **separator_defaults,
-            **color_scheme
+            background = color_scheme["background"],
+            foreground = color_scheme["arrow_color"]
         )
     else:
         ret = widget.TextBox(
             u'\ue0b2', 
             **separator_defaults,
-            **color_scheme
+            background = color_scheme["background"],
+            foreground = color_scheme["arrow_color"]
         )
 
         separator.current_scheme = (separator.current_scheme + 1) % 2
@@ -208,7 +212,6 @@ screens = [
         bottom=bar.Bar(
             bar_widgets,
             24,
-            opacity=0.8,
         ),
     ),
 ]
@@ -241,7 +244,6 @@ if get_num_monitors() > 1:
                  top=bar.Bar(
                  second_bar_widgets,
                  24,
-                 opacity=0.8,
             ),
         )
     )

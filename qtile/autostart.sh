@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Compton for transparency
-#compton --config /home/pierre/.compton &
+# compton --config /home/pierre/.compton &
 compton &
 
 # Network applet
@@ -11,4 +11,4 @@ nm-applet &
 albert &
 
 # Wallpaper
-feh --bg-fill /home/pierre/Pictures/Wallpapers/proteus.jpg &
+feh --bg-fill /home/pierre/Pictures/Wallpapers/Ulam.jpg &

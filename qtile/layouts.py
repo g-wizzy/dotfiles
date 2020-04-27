@@ -33,6 +33,8 @@ floating_layout = layout.Floating(auto_float_typesR=[
     {'wmclass': 'error'},
     {'wmclass': 'file_progress'},
     {'wmclass': 'notification'},
+    {'wmclass': 'notify'},
+    {'wmclass': 'popup_menu'},
     {'wmclass': 'splash'},
     {'wmclass': 'toolbar'},
     {'wmclass': 'confirmreset'},  # gitk
