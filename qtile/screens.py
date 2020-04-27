@@ -3,8 +3,52 @@ from libqtile import widget, bar
 
 from Xlib import display as xdisplay
 
+primary_color = '1d1f21'
+secondary_color = 'c5c8c6'
+
+color_schemes = [dict(
+    background = primary_color,
+    foreground = secondary_color
+), dict(
+    background = secondary_color,
+    foreground = primary_color
+)]
+
+color_scheme = color_schemes[0]
+
+def separator(right_looking = True):
+    global color_scheme
+    if right_looking:
+        separator.current_scheme = (separator.current_scheme + 1) % 2
+        color_scheme = color_schemes[separator.current_scheme]
+
+        return widget.TextBox(
+            u'\ue0b0', 
+            **separator_defaults,
+            **color_scheme
+        )
+    else:
+        ret = widget.TextBox(
+            u'\ue0b2', 
+            **separator_defaults,
+            **color_scheme
+        )
+
+        separator.current_scheme = (separator.current_scheme + 1) % 2
+        color_scheme = color_schemes[separator.current_scheme]
+
+        return ret
+
+separator.current_scheme = 0
+
+separator_defaults = dict(
+    font='Victor Mono',
+    fontsize=24,
+    padding=0,
+)
+
 widget_defaults = dict(
-    font='Victor Mono', #old = 'sans'
+    font='sans',
     fontsize=12,
     padding=6,
 )
@@ -24,36 +68,139 @@ battery_widget_defaults = dict(
 )
 
 bar_widgets = [
-    widget.CurrentLayoutIcon(**widget_defaults),
-    widget.GroupBox(**widget_defaults),
-    widget.WindowName(**widget_defaults),
+    # widget.CurrentLayoutIcon(**widget_defaults),
+    widget.GroupBox(
+        **widget_defaults,
+        **color_scheme
+    ),
 
-    widget.Clock(**widget_defaults, format='%H:%M:%S %a %d.%m.%Y'),
-    widget.Spacer(length=128),
+    separator(),
 
-    widget.Systray(**widget_defaults, icon_size=24),
-    widget.Spacer(length=24),
+    widget.Spacer(
+        length = 16,
+        **color_scheme,
+    ),
 
-    widget.TextBox(u'\ue8ef', **icon_defaults),
-    widget.Volume(**widget_defaults, device = "sysdefault", format='[{percent:2.0%}]  '), 
+    widget.WindowName(
+        **widget_defaults,
+        **color_scheme,
+    ),
+
+    separator(right_looking = False),
+
+    widget.Clock(
+        **widget_defaults,
+        **color_scheme,
+        format='%H:%M:%S %a %d.%m.%Y',
+    ),
+
+    separator(right_looking = False),
+
+    widget.Systray(
+        icon_size=24,
+        **widget_defaults,
+        **color_scheme,
+    ),
+
+    widget.Spacer(
+        length = 16,
+        **color_scheme,
+    ),
+
+    separator(right_looking = False),
+
+    widget.TextBox(
+        u'\ue8ef',
+        **icon_defaults,
+        **color_scheme,
+    ),
+    widget.Volume(
+        **widget_defaults,
+        **color_scheme,
+        device = "sysdefault",
+        format='[{percent:2.0%}]  '
+    ),
+
+    separator(right_looking = False),
     
-    widget.TextBox(u'\ue8cf', **icon_defaults),
-    widget.Backlight(**widget_defaults, backlight_name='intel_backlight', format='[{percent:2.0%}]  '),
+    widget.TextBox(
+        u'\ue8cf',
+        **icon_defaults,
+        **color_scheme,
+    ),
+    widget.Backlight(
+        **widget_defaults,
+        **color_scheme,
+        backlight_name='intel_backlight',
+        format='[{percent:2.0%}]  '
+    ),
+
+    separator(right_looking = False),
     
-    widget.TextBox(u'\ue832', **icon_defaults), 
-    widget.Battery(**widget_defaults, **battery_widget_defaults, battery=0),
+    widget.TextBox(
+        u'\ue832',
+        **icon_defaults,
+        **color_scheme
+    ), 
+    widget.Battery(
+        **widget_defaults,
+        **battery_widget_defaults,
+        **color_scheme,
+        battery=0
+    ),
+
+    separator(right_looking = False),
     
-    widget.TextBox(u'\ue832', **icon_defaults),
-    widget.Battery(**widget_defaults, **battery_widget_defaults, battery=1),
+    widget.TextBox(
+        u'\ue832', 
+        **icon_defaults,
+        **color_scheme,
+    ),
+    widget.Battery(
+        **widget_defaults,
+        **battery_widget_defaults,
+        **color_scheme,
+        battery=1
+    ),
+
+    separator(right_looking = False),
     
-    widget.CPUGraph(**widget_defaults, margin_x=12),
+    widget.CPUGraph(
+        **widget_defaults,
+        **color_scheme,
+        margin_x=12
+    ),
 ]
 
+separator.current_scheme = 0
+
 second_bar_widgets = [
-    widget.CurrentLayoutIcon(**widget_defaults),
-    widget.GroupBox(**widget_defaults),
-    widget.WindowName(**widget_defaults),
-    widget.CurrentScreen(**widget_defaults, active_text = "active", inactive_text = "inactive"),
+    widget.GroupBox(
+        **widget_defaults,
+        **color_scheme,
+    ),
+
+    separator(),
+
+    widget.Spacer(
+        length = 16,
+        **color_scheme,
+    ),
+
+    widget.WindowName(
+        **widget_defaults,
+        **color_scheme,
+    ),
+
+    separator(right_looking = False),
+
+
+    widget.CurrentScreen(
+        **widget_defaults,
+        **color_scheme,
+        active_text = "active",
+        inactive_text = "inactive"
+    ),
 ]
 
 screens = [
