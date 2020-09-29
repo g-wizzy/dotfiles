@@ -80,9 +80,13 @@ source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+	alias-finder
+	thefuck
 	git
 	extract
 	colored-man-pages
+	screen
+	pip
 	virtualenv
 	vscode	
 )
