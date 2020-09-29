@@ -91,9 +91,20 @@ battery_widget_defaults = dict(
 
 bar_widgets = [
     # widget.CurrentLayoutIcon(**widget_defaults),
+
     widget.GroupBox(
         **widget_defaults,
-        **color_scheme
+        **color_scheme,
+        # Text colors
+        active=theme["base03"],
+        inactive=theme["base1"],
+        # Current screen colors
+        highlight_method='line',
+        highlight_color=theme["yellow"],
+        this_current_screen_border=theme["red"],
+        # Urgent colors
+        urgent_alert_method="block",
+        urgent_border=theme["magenta"]
     ),
 
     separator(),
