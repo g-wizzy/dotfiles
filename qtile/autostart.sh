@@ -11,4 +11,4 @@ nm-applet &
 albert &
 
 # Wallpaper
-feh --bg-fill /home/pierre/Pictures/Wallpapers/Ulam.jpg &
+feh --bg-scale /home/pierre/Pictures/Wallpapers/glitch.png &
