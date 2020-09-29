@@ -190,6 +190,11 @@ bar_widgets = [
     widget.CPUGraph(
         **widget_defaults,
         **color_scheme,
+        frequency=0.33,
+        samples=300,
+        border_width=0,
+        graph_color=theme['orange'],
+        fill_color=theme['yellow'],
         margin_x=12
     ),
 ]
