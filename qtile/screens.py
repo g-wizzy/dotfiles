@@ -70,7 +70,7 @@ separator_defaults = dict(
 )
 
 widget_defaults = dict(
-    font='sans',
+    font='Victor Mono',
     fontsize=12,
     padding=6,
 )
@@ -85,7 +85,7 @@ icon_defaults = dict(
 battery_widget_defaults = dict(
     format='{char}[{percent:2.0%}]  ',
     low_percentage=0.2,
-    update_interval=15,
+    update_interval=5,
     show_short_text=False
 )
 
