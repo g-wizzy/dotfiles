@@ -39,7 +39,7 @@ color_scheme = color_schemes[1]
 def separator(right_looking = True):
     global color_scheme
     if right_looking:
-        separator.current_scheme = (separator.current_scheme + 1) % 2
+        separator.current_scheme = 1 - separator.current_scheme
         color_scheme = color_schemes[separator.current_scheme]
 
         return widget.TextBox(
