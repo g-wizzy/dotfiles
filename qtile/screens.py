@@ -3,20 +3,38 @@ from libqtile import widget, bar
 
 from Xlib import display as xdisplay
 
-primary_color = '1c2023'
-secondary_color = '747c84'
+primary_color = 'b58900'
+secondary_color = 'eee8d5'
 
-color_schemes = [dict(
-    background = primary_color,
-    arrow_color = secondary_color,
-    foreground = 'ffffff'
-), dict(
-    background = secondary_color,
-    arrow_color = primary_color,
-    foreground = 'ffffff'
-)]
+theme = dict(
+    base03 = '002b36',
+    base02 = '073642',
+    base01 = '586e75',
+    base00 = '657b83',
+    base0 = '839496',
+    base1 = '93a1a1',
+    base2 = 'eee8d5',
+    base3 = 'fdf6e3',
+    yellow = 'b58900',
+    orange = 'cb4b16',
+    red = 'dc322f',
+    magenta = 'd33682'
+)
 
-color_scheme = color_schemes[0]
+color_schemes = [
+    dict(
+        background = theme['base3'],
+        arrow_color = theme['base2'],
+        foreground = theme['base03']
+    ),
+    dict(
+        background = theme['base2'],
+        arrow_color = theme['base3'],
+        foreground = theme['base03']
+    )
+]
+
+color_scheme = color_schemes[1]
 
 def separator(right_looking = True):
     global color_scheme
@@ -43,7 +61,7 @@ def separator(right_looking = True):
 
         return ret
 
-separator.current_scheme = 0
+separator.current_scheme = 1
 
 separator_defaults = dict(
     font='Victor Mono',
