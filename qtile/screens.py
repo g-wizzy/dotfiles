@@ -25,12 +25,12 @@ color_schemes = [
     dict(
         background = theme['base3'],
         arrow_color = theme['base2'],
-        foreground = theme['base03']
+        foreground = theme['base01']
     ),
     dict(
         background = theme['base2'],
         arrow_color = theme['base3'],
-        foreground = theme['base03']
+        foreground = theme['base01']
     )
 ]
 
@@ -70,7 +70,7 @@ separator_defaults = dict(
 )
 
 widget_defaults = dict(
-    font='Victor Mono',
+    font='Victor Mono Semibold',
     fontsize=12,
     padding=6,
 )
@@ -95,6 +95,7 @@ bar_widgets = [
     widget.GroupBox(
         **widget_defaults,
         **color_scheme,
+        disable_drag=False,
         # Text colors
         active=theme["base03"],
         inactive=theme["base1"],
@@ -204,7 +205,7 @@ bar_widgets = [
         frequency=0.33,
         samples=300,
         border_width=0,
-        graph_color=theme['orange'],
+        line_width=0,
         fill_color=theme['yellow'],
         margin_x=12
     ),
