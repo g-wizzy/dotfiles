@@ -120,6 +120,18 @@ bar_widgets = [
         **color_scheme,
     ),
 
+    # Note: requires to change the default Ubuntu command in libqtile.widget.CheckUpdates
+    # from `aptitude search ~U`
+    # into `apt list --upgradable`
+    # and change the number of lines to substract from 0 to 1
+    widget.CheckUpdates(
+        **widget_defaults,
+        **color_scheme,
+        distro="Ubuntu",
+        colour_no_updates=color_scheme["foreground"],
+        colour_have_updates=theme["orange"],
+    ),
+
     separator(right_looking = False),
 
     widget.Clock(
