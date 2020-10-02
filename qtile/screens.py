@@ -3,9 +3,7 @@ from libqtile import widget, bar
 
 from Xlib import display as xdisplay
 
-primary_color = 'b58900'
-secondary_color = 'eee8d5'
-
+# Solarized light
 theme = dict(
     base03 = '002b36',
     base02 = '073642',
@@ -34,7 +32,7 @@ color_schemes = [
     )
 ]
 
-color_scheme = color_schemes[1]
+# Separator-related functions and variables
 
 def separator(right_looking = True):
     global color_scheme
@@ -56,11 +54,12 @@ def separator(right_looking = True):
             foreground = color_scheme["arrow_color"]
         )
 
-        separator.current_scheme = (separator.current_scheme + 1) % 2
+        separator.current_scheme = 1 - separator.current_scheme
         color_scheme = color_schemes[separator.current_scheme]
 
         return ret
 
+color_scheme = color_schemes[1]
 separator.current_scheme = 1
 
 separator_defaults = dict(
@@ -68,6 +67,7 @@ separator_defaults = dict(
     fontsize=24,
     padding=0,
 )
+
 
 widget_defaults = dict(
     font='Victor Mono Semibold',
@@ -90,7 +90,6 @@ battery_widget_defaults = dict(
 )
 
 bar_widgets = [
-    # widget.CurrentLayoutIcon(**widget_defaults),
 
     widget.GroupBox(
         **widget_defaults,
@@ -155,6 +154,7 @@ bar_widgets = [
 
     separator(right_looking = False),
 
+    # Volume icon and widget
     widget.TextBox(
         u'\ue8ef',
         **icon_defaults,
@@ -169,6 +169,7 @@ bar_widgets = [
 
     separator(right_looking = False),
     
+    # Brightness icon and widget
     widget.TextBox(
         u'\ue8cf',
         **icon_defaults,
@@ -183,6 +184,7 @@ bar_widgets = [
 
     separator(right_looking = False),
     
+    # Battery icon and widget
     widget.TextBox(
         u'\ue832',
         **icon_defaults,
@@ -197,6 +199,7 @@ bar_widgets = [
 
     separator(right_looking = False),
     
+    # Battery icon and widget
     widget.TextBox(
         u'\ue832', 
         **icon_defaults,
@@ -223,6 +226,7 @@ bar_widgets = [
     ),
 ]
 
+# Second screen bar
 separator.current_scheme = 0
 
 second_bar_widgets = [

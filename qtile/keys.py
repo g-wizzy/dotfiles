@@ -3,6 +3,7 @@ from libqtile.lazy import lazy
 
 from datetime import datetime as time
 
+# BSP resizing taken from https://github.com/qtile/qtile/issues/1402
 def resize(qtile, direction):
     layout = qtile.current_layout
     child = layout.current
@@ -92,9 +93,10 @@ keys = [
     Key("<XF86Calculator>", lazy.spawn("gnome-calculator")),
     
     # Screen capture (Shift => selection, Ctrl => to clipboard)
+    # Requires to write one-line script `maim_to_clip` and have it in $PATH
     Key("<Print>", lazy.spawn(f"maim /home/pierre/Pictures/{time.now().isoformat()}.png")),
-    Key("C-<Print>", lazy.spawn("maim_to_clip")),
     Key("S-<Print>", lazy.spawn(f"maim -s /home/pierre/Pictures/{time.now().isoformat()}.png")),
+    Key("C-<Print>", lazy.spawn("maim_to_clip")),
     Key("C-S-<Print>", lazy.spawn("maim_to_clip -s")),
 
     Key("M-w", lazy.window.kill()),
@@ -103,20 +105,20 @@ keys = [
     Key("M-S-C-q", lazy.spawn("shutdown 0")),
     Key("M-S-C-l", lazy.spawn("gnome-screensaver-command -l")),
 
-    # Volume
+    # Volume (hold shift for lighter adjustments)
     Key("<XF86AudioLowerVolume>", lazy.spawn("amixer -c 0 -q set Master 5%-")),
     Key("S-<XF86AudioLowerVolume>", lazy.spawn("amixer -c 0 -q set Master 1%-")),
     Key("<XF86AudioRaiseVolume>", lazy.spawn("amixer -c 0 -q set Master 5%+")),
     Key("S-<XF86AudioRaiseVolume>", lazy.spawn("amixer -c 0 -q set Master 1%+")),
     Key("<XF86AudioMute>", lazy.spawn("amixer -D pulse set Master 1+ toggle")),
 
-    # Brightness
+    # Brightness (hold shift for lighter adjustments)
     Key("<XF86MonBrightnessUp>", lazy.spawn("light -A 5")),
     Key("S-<XF86MonBrightnessUp>", lazy.spawn("light -A 1")),
     Key("<XF86MonBrightnessDown>", lazy.spawn("light -U 5")),
     Key("S-<XF86MonBrightnessDown>", lazy.spawn("light -U 1")),
 
-    # Multi-screen test
+    # Multi-screen test (not very convincing)
     Key("M-<Escape>", lazy.next_screen()),
     Key("M-p", lazy.spawn("sh -c ~/scripts/monitor_layout.sh")),
     Key("M-S-p", lazy.spawn("sh -c ~/scripts/rotate_secondary_display.sh")),
