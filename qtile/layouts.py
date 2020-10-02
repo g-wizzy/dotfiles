@@ -1,7 +1,7 @@
 from libqtile import layout
 
 layout_defaults = dict(
-    margin = 15,
+    margin = 5,
     border_width = 3,
     border_focus="#FFFFFF",
     grow_amount = 3,
