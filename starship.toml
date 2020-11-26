@@ -1,0 +1,20 @@
+# Don't print a new line at the start of the prompt
+add_newline = false
+
+[character]
+success_symbol = "[❯](bold fg:#2aa198)"
+error_symbol = "[❯](bold fg:#dc322f)"
+
+[directory]
+style = "bold fg:#b58900"
+
+[git_branch]
+style = "bold fg:#d33682"
+
+[git_status]
+style = "bold fg:#d33682"
+
+[python]
+style = "bold fg:#268bd2"
+scan_for_pyfiles = false
+format = 'via [python ${version}( \($virtualenv\))]($style) '
