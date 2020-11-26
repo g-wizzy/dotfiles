@@ -1,6 +1,8 @@
 from libqtile.config import Screen
 from libqtile import widget, bar
 
+from custom_battery_widget import CustomBattery
+
 from Xlib import display as xdisplay
 
 # Solarized light
@@ -82,8 +84,8 @@ icon_defaults = dict(
     padding = 6,
 )
 
-battery_widget_defaults = dict(
-    format='{char}[{percent:2.0%}]  ',
+battery_text_widget_defaults = dict(
+    format='{percent:2.0%}',
     low_percentage=0.2,
     update_interval=5,
     show_short_text=False
@@ -184,30 +186,30 @@ bar_widgets = [
 
     separator(right_looking = False),
     
-    # Battery icon and widget
-    widget.TextBox(
-        u'\ue832',
+    CustomBattery(
         **icon_defaults,
-        **color_scheme
+        **battery_text_widget_defaults,
+        **color_scheme,
+        battery=0
     ), 
     widget.Battery(
         **widget_defaults,
-        **battery_widget_defaults,
+        **battery_text_widget_defaults,
         **color_scheme,
         battery=0
     ),
 
     separator(right_looking = False),
     
-    # Battery icon and widget
-    widget.TextBox(
-        u'\ue832', 
+    CustomBattery(
         **icon_defaults,
+        **battery_text_widget_defaults,
         **color_scheme,
+        battery=1
     ),
     widget.Battery(
         **widget_defaults,
-        **battery_widget_defaults,
+        **battery_text_widget_defaults,
         **color_scheme,
         battery=1
     ),
