@@ -11,6 +11,11 @@ def albert_open(window):
     if window.name == "Albert":
         window.cmd_togroup()
 
+@hook.subscribe.client_focus
+def focus_floating(window):
+    if window.floating:
+        window.cmd_bring_to_front()
+
 @hook.subscribe.client_new
 def floating_dialogs(window):
     dialog = window.window.get_wm_type() == 'dialog'
