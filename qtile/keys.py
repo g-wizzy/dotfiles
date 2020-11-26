@@ -54,12 +54,12 @@ def float_to_front(qtile):
 def screenshot(to_clip = False, rect_select = False):
     def f(qtile):
         command = []
-        
+
         if to_clip:
             # Requires to write one-line script `maim_to_clip` and have it in $PATH
-            command += ["maim_to_clip"]
+            command += ["maim-to-clip"]
         else:
-            command += ["maim", f"/home/pierre/Pictures/{time.now().isoformat()}.png"]
+            command += ["maim", f"$HOME/Pictures/{time.now().isoformat()}.png"]
 
         if rect_select:
             command += ["-s"]

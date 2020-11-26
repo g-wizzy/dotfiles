@@ -3,7 +3,7 @@ import subprocess
 
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.call(["/home/pierre/.config/qtile/autostart.sh"])
+    subprocess.call(["$HOME/.config/qtile/autostart.sh"])
 
 # Always display launcher in current group
 @hook.subscribe.client_new
