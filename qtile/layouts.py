@@ -1,9 +1,10 @@
 from libqtile import layout
 
 layout_defaults = dict(
-    margin = 5,
+    margin = 0,
     border_width = 3,
-    border_focus="#FFFFFF",
+    border_normal='#fdf6e3',
+    border_focus="#b58900",
     grow_amount = 3,
     )
 
@@ -11,8 +12,8 @@ floating_layout_defaults = layout_defaults.copy()
 floating_layout_defaults["border_width"] = 0
 
 layouts = [
-    layout.Max(**layout_defaults),
     layout.Bsp(name="bsp", **layout_defaults),
+    layout.Max(**layout_defaults),
 
     # layout.Stack(num_stacks=2),
     # layout.Columns(),
