@@ -61,8 +61,9 @@ def separator(right_looking = True):
 
         return ret
 
-color_scheme = color_schemes[1]
-separator.current_scheme = 1
+# Determines the color scheme on the leftmost widget
+color_scheme = color_schemes[0]
+separator.current_scheme = 0
 
 separator_defaults = dict(
     font='Victor Mono',
@@ -78,11 +79,8 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-icon_defaults = dict(
-    font='feather',
-    fontsize = 18,
-    padding = 6,
-)
+icon_defaults = widget_defaults.copy()
+icon_defaults["fontsize"] = 32
 
 battery_text_widget_defaults = dict(
     format='{percent:2.0%}',
@@ -92,6 +90,14 @@ battery_text_widget_defaults = dict(
 )
 
 bar_widgets = [
+
+    widget.CurrentLayoutIcon(
+        **widget_defaults,
+        **color_scheme,
+        scale=0.8,
+    ),
+
+    separator(),
 
     widget.GroupBox(
         **widget_defaults,
@@ -128,7 +134,7 @@ bar_widgets = [
     widget.CheckUpdates(
         **widget_defaults,
         **color_scheme,
-        distro="Ubuntu",
+        distro="Arch",
         colour_no_updates=color_scheme["foreground"],
         colour_have_updates=theme["orange"],
     ),
@@ -158,7 +164,7 @@ bar_widgets = [
 
     # Volume icon and widget
     widget.TextBox(
-        u'\ue8ef',
+        u'\ufa7d',
         **icon_defaults,
         **color_scheme,
     ),
@@ -166,14 +172,13 @@ bar_widgets = [
         **widget_defaults,
         **color_scheme,
         device = "sysdefault",
-        format='[{percent:2.0%}]  '
     ),
 
     separator(right_looking = False),
     
     # Brightness icon and widget
     widget.TextBox(
-        u'\ue8cf',
+        u'\uf5dd',
         **icon_defaults,
         **color_scheme,
     ),
@@ -181,7 +186,7 @@ bar_widgets = [
         **widget_defaults,
         **color_scheme,
         backlight_name='intel_backlight',
-        format='[{percent:2.0%}]  '
+        format='{percent:2.0%}'
     ),
 
     separator(right_looking = False),
@@ -191,7 +196,7 @@ bar_widgets = [
         **battery_text_widget_defaults,
         **color_scheme,
         battery=0
-    ), 
+    ),
     widget.Battery(
         **widget_defaults,
         **battery_text_widget_defaults,
@@ -200,7 +205,7 @@ bar_widgets = [
     ),
 
     separator(right_looking = False),
-    
+
     CustomBattery(
         **icon_defaults,
         **battery_text_widget_defaults,
@@ -251,7 +256,6 @@ second_bar_widgets = [
 
     separator(right_looking = False),
 
-
     widget.CurrentScreen(
         **widget_defaults,
         **color_scheme,
@@ -262,7 +266,7 @@ second_bar_widgets = [
 
 screens = [
     Screen(
-        bottom=bar.Bar(
+        top=bar.Bar(
             bar_widgets,
             24,
         ),
