@@ -1,9 +1,10 @@
 from libqtile import hook
-import subprocess
+import subprocess, os
 
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.call(["$HOME/.config/qtile/autostart.sh"])
+    path = os.path.expanduser("~/.config/qtile/autostart.sh")
+    subprocess.call([path])
 
 # Always display launcher in current group
 @hook.subscribe.client_new
