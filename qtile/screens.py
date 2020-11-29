@@ -91,8 +91,8 @@ bar_widgets = [
         **color_scheme,
         disable_drag=False,
         # Text colors
-        active=theme.txt2,
-        inactive=theme.txt0,
+        active=theme.txt0,
+        inactive=theme.bg2,
         # Current screen colors
         highlight_method='line',
         highlight_color=theme.highlight3,
