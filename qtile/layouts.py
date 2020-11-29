@@ -1,10 +1,12 @@
 from libqtile import layout
 
+from color_themes import nord_theme as theme
+
 layout_defaults = dict(
     margin = 0,
     border_width = 3,
-    border_normal='#fdf6e3',
-    border_focus="#b58900",
+    border_normal=theme.bg0,
+    border_focus=theme.highlight0,
     grow_amount = 3,
     )
 

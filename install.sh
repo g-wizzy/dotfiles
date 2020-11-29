@@ -28,6 +28,7 @@ ln -s $dir/qtile/groups.py ~/.config/qtile/groups.py
 ln -s $dir/qtile/keys.py ~/.config/qtile/keys.py
 ln -s $dir/qtile/layouts.py ~/.config/qtile/layouts.py
 ln -s $dir/qtile/screens.py ~/.config/qtile/screens.py
+ln -s $dir/qtile/color_themes.py ~/.config/qtile/color_themes.py
 ln -s $dir/qtile/autostart.sh ~/.config/qtile/autostart.sh
 
 # Install picom configuration

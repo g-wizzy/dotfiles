@@ -67,3 +67,14 @@ inoremap <A-j> <Esc>:m+1<CR>==g1
 inoremap <A-k> <Esc>:m-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
+
+call plug#begin(expand('~/.vim/plugged'))
+
+call plug#end()
+
+Plug 'arcticicestudio/nord-vim'
+
+call plug#end()
+
+colorscheme nord
+

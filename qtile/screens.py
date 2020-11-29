@@ -2,35 +2,22 @@ from libqtile.config import Screen
 from libqtile import widget, bar
 
 from custom_battery_widget import CustomBattery
+from color_themes import nord_theme as theme
 
 from Xlib import display as xdisplay
 
-# Solarized light
-theme = dict(
-    base03 = '002b36',
-    base02 = '073642',
-    base01 = '586e75',
-    base00 = '657b83',
-    base0 = '839496',
-    base1 = '93a1a1',
-    base2 = 'eee8d5',
-    base3 = 'fdf6e3',
-    yellow = 'b58900',
-    orange = 'cb4b16',
-    red = 'dc322f',
-    magenta = 'd33682'
-)
+
 
 color_schemes = [
     dict(
-        background = theme['base3'],
-        arrow_color = theme['base2'],
-        foreground = theme['base01']
+        background = theme.bg0,
+        arrow_color = theme.bg1,
+        foreground = theme.txt2
     ),
     dict(
-        background = theme['base2'],
-        arrow_color = theme['base3'],
-        foreground = theme['base01']
+        background = theme.bg1,
+        arrow_color = theme.bg0,
+        foreground = theme.txt2
     )
 ]
 
@@ -104,15 +91,15 @@ bar_widgets = [
         **color_scheme,
         disable_drag=False,
         # Text colors
-        active=theme["base03"],
-        inactive=theme["base1"],
+        active=theme.txt2,
+        inactive=theme.txt0,
         # Current screen colors
         highlight_method='line',
-        highlight_color=theme["yellow"],
-        this_current_screen_border=theme["red"],
+        highlight_color=theme.highlight3,
+        this_current_screen_border=theme.alert3,
         # Urgent colors
         urgent_alert_method="block",
-        urgent_border=theme["magenta"]
+        urgent_border=theme.alert2
     ),
 
     separator(),
@@ -136,7 +123,7 @@ bar_widgets = [
         **color_scheme,
         distro="Arch",
         colour_no_updates=color_scheme["foreground"],
-        colour_have_updates=theme["orange"],
+        colour_have_updates=theme.alert1,
     ),
 
     separator(right_looking = False),
@@ -228,7 +215,7 @@ bar_widgets = [
         samples=300,
         border_width=0,
         line_width=0,
-        fill_color=theme['yellow'],
+        fill_color=theme.highlight1,
         margin_x=12
     ),
 ]
@@ -289,7 +276,7 @@ def get_num_monitors():
                 preferred = monitor.num_preferred
             if preferred:
                 num_monitors += 1
-    except Exception as e:
+    except Exception:
         # always setup at least one monitor
         return 1
     else:

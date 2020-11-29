@@ -2,19 +2,19 @@
 add_newline = false
 
 [character]
-success_symbol = "[❯](bold fg:#2aa198)"
-error_symbol = "[❯](bold fg:#dc322f)"
+success_symbol = "[❯](bold fg:#8fbcbb)"
+error_symbol = "[❯](bold fg:#bf616a)"
 
 [directory]
-style = "bold fg:#b58900"
+style = "bold fg:#8fbcbb"
 
 [git_branch]
-style = "bold fg:#d33682"
+style = "bold fg:#5e81ac"
 
 [git_status]
-style = "bold fg:#d33682"
+style = "bold fg:#5e81ac"
 
 [python]
-style = "bold fg:#268bd2"
+style = "bold fg:#88c0d0"
 scan_for_pyfiles = false
 format = 'via [python ${version}( \($virtualenv\))]($style) '
