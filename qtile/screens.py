@@ -112,6 +112,7 @@ bar_widgets = [
     widget.WindowName(
         **widget_defaults,
         **color_scheme,
+        show_state=False
     ),
 
     # Note: requires to change the default Ubuntu command in libqtile.widget.CheckUpdates
