@@ -1,6 +1,9 @@
 # Don't print a new line at the start of the prompt
 add_newline = false
 
+[battery]
+disabled = true
+
 [character]
 success_symbol = "[❯](bold fg:#8fbcbb)"
 error_symbol = "[❯](bold fg:#bf616a)"
