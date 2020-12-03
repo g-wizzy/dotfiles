@@ -69,6 +69,19 @@ extension_defaults = widget_defaults.copy()
 icon_defaults = widget_defaults.copy()
 icon_defaults["fontsize"] = 32
 
+group_box_widget_defaults = dict(
+    # Text colors
+    active=theme.txt0,
+    inactive=theme.bg2,
+    # Current screen colors
+    highlight_method='line',
+    highlight_color=theme.highlight3,
+    this_current_screen_border=theme.alert3,
+    # Urgent colors
+    urgent_alert_method="block",
+    urgent_border=theme.alert2
+)
+
 battery_text_widget_defaults = dict(
     format='{percent:2.0%}',
     low_percentage=0.2,
@@ -89,17 +102,7 @@ bar_widgets = [
     widget.GroupBox(
         **widget_defaults,
         **color_scheme,
-        disable_drag=False,
-        # Text colors
-        active=theme.txt0,
-        inactive=theme.bg2,
-        # Current screen colors
-        highlight_method='line',
-        highlight_color=theme.highlight3,
-        this_current_screen_border=theme.alert3,
-        # Urgent colors
-        urgent_alert_method="block",
-        urgent_border=theme.alert2
+        **group_box_widget_defaults
     ),
 
     separator(),
@@ -221,13 +224,15 @@ bar_widgets = [
     ),
 ]
 
-# Second screen bar
-separator.current_scheme = 0
+# reset colors
+separator()
 
+# Second screen bar
 second_bar_widgets = [
     widget.GroupBox(
         **widget_defaults,
         **color_scheme,
+        **group_box_widget_defaults
     ),
 
     separator(),
