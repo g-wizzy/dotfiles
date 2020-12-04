@@ -85,6 +85,7 @@ group_box_widget_defaults = dict(
 battery_text_widget_defaults = dict(
     format='{percent:2.0%}',
     low_percentage=0.2,
+    low_foreground=theme.alert0,
     update_interval=5,
     show_short_text=False
 )
