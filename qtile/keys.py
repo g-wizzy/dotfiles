@@ -100,7 +100,7 @@ keys = [
 
     # Programs shortcuts
     Key("M-<Return>", lazy.spawn("kitty")),
-    Key("M-e", lazy.spawn("nautilus")),
+    Key("M-e", lazy.spawn("kitty sh -c 'ranger'")),
 
     Key("M-r", lazy.spawn("albert show")),
     Key("A-<Tab>", lazy.spawn("rofi -show window")),
@@ -138,7 +138,7 @@ keys = [
 
     # Multi-screen test (not very convincing)
     Key("M-<Escape>", lazy.next_screen()),
-    Key("M-p", lazy.spawn("display_select")),
+    Key("M-p", lazy.spawn("display-select")),
     Key("M-S-p", lazy.spawn("sh -c ~/scripts/rotate_secondary_display.sh")),
 ]
 
