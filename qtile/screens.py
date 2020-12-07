@@ -256,7 +256,7 @@ screens = [
         ),
     ),
     Screen(
-            top=bar.Bar(
+        top=bar.Bar(
             second_bar_widgets,
             24,
         ),
