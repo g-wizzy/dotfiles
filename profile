@@ -46,8 +46,8 @@ source $HOME/.local/bin/virtualenvwrapper.sh
 
 
 # St-Imier screens setup
-xrandr --output HDMI1 --auto \
-	--output DP2 --auto --right-of HDMI1 --rotate left
+xrandr --output HDMI1 --auto --pos 0x840 \
+	--output DP2 --auto --rotate left --pos 1920x0
 
 # Swap Ctrl and Caps Lock
 /usr/bin/setxkbmap -option "ctrl:swapcaps"
