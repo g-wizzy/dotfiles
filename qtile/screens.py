@@ -246,15 +246,6 @@ second_bar_widgets = [
         **widget_defaults,
         **color_scheme,
     ),
-
-    separator(right_looking = False),
-
-    widget.CurrentScreen(
-        **widget_defaults,
-        **color_scheme,
-        active_text = "active",
-        inactive_text = "inactive"
-    ),
 ]
 
 screens = [
