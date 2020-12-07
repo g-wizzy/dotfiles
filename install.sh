@@ -22,3 +22,6 @@ ln -s $dir/qtile ~/.config/qtile
 
 # Install picom configuration
 ln -s $dir/picom.conf ~/.config/picom.conf
+
+# Install rofi
+ln -s $dir/rofi ~/.config/rofi
