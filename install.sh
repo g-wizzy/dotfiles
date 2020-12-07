@@ -25,3 +25,7 @@ ln -s $dir/picom.conf ~/.config/picom.conf
 
 # Install rofi
 ln -s $dir/rofi ~/.config/rofi
+
+# Install custom scripts
+ln -s $dir/scripts ~/scripts
+

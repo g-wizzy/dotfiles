@@ -19,4 +19,4 @@ kdeconnect-indicator &
 albert &
 
 # Wallpaper
-feh --bg-scale $HOME/Pictures/Wallpapers/eraserhead.png &
+# feh --bg-scale $HOME/Pictures/Wallpapers/eraserhead.png &
