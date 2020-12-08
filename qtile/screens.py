@@ -162,7 +162,7 @@ bar_widgets = [
     widget.Volume(
         **widget_defaults,
         **color_scheme,
-        device = "sysdefault",
+        device = "default",
     ),
 
     separator(right_looking = False),
