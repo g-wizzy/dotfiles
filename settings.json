@@ -6,6 +6,8 @@
     "editor.mouseWheelZoom": true,
     "editor.renderWhitespace": "boundary",
     "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 80,
+    "editor.rulers": [80],
     "editor.wrappingIndent": "indent",
     "files.exclude": {
         "__pycache__": true
@@ -21,5 +23,6 @@
     "explorer.autoReveal": false,
     "terminal.external.linuxExec": "kitty",
     "terminal.integrated.allowMnemonics": true,
-    "git.supportCancellation": true
+    "git.supportCancellation": true,
+    "workbench.startupEditor": "newUntitledFile"
 }
