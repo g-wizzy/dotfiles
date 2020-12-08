@@ -10,7 +10,7 @@ def autostart():
 @hook.subscribe.client_new
 def albert_open(window):
     if window.name == "Albert":
-        window.cmd_togroup()
+        window.cmd_toscreen()
 
 @hook.subscribe.client_focus
 def focus_floating(window):
