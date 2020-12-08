@@ -26,6 +26,10 @@ ln -s $dir/picom.conf ~/.config/picom.conf
 # Install rofi
 ln -s $dir/rofi ~/.config/rofi
 
+# Install vscode
+mkdir -p "~/.config/Code - OSS/User"
+ln -s $dir/settings.json "~.config/Code - OSS/User/settings.json"
+
 # Install custom scripts
 ln -s $dir/scripts ~/scripts
 
