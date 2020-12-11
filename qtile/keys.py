@@ -115,7 +115,7 @@ keys = [
     Key("<Print>", lazy.function(screenshot())),
     Key("C-<Print>", lazy.function(screenshot(to_clip = True))),
     Key("S-<Print>", lazy.function(screenshot(rect_select = True))),
-    Key("C-S-<Print>", lazy.function(screenshot(to_clip = True, rect_select = True))),
+    Key("C-S-<Print>", lazy.function(screenshot(to_clip = True, rect_select = False))),
 
 
     Key("M-w", lazy.window.kill()),
