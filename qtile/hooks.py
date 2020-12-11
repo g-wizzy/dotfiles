@@ -10,7 +10,7 @@ def autostart():
 @hook.subscribe.client_new
 def albert_open(window):
     if window.name == "Albert":
-        window.cmd_togroup()
+        window.cmd_toscreen()
 
 @hook.subscribe.client_focus
 def focus_floating(window):
@@ -20,18 +20,23 @@ def focus_floating(window):
 # Prevent Albert from losing focus on mouse out
 @hook.subscribe.client_focus
 def albert_holds_focus(window):
-    if (albert_holds_focus.last_focused and
-        albert_holds_focus.last_focused.name == "Albert"):
-        albert_holds_focus.last_focused.cmd_focus()
-    else:
-        albert_holds_focus.last_focused = window
+    
+    previous_focus = albert_holds_focus.current_focus
+    albert_holds_focus.current_focus = window
 
-albert_holds_focus.last_focused = None
+    if (
+        previous_focus
+        and
+        previous_focus.name == "Albert"
+    ):
+        previous_focus.cmd_focus()
+
+albert_holds_focus.current_focus = None
 
 @hook.subscribe.client_killed
 def albert_dies(window):
     if window.name == "Albert":
-        albert_holds_focus.last_focused = None
+        albert_holds_focus.current_focus = None
 
 @hook.subscribe.client_new
 def floating_dialogs(window):

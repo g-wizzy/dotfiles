@@ -56,8 +56,8 @@ def screenshot(to_clip = False, rect_select = False):
         command = []
 
         if to_clip:
-            # Requires to write one-line script `maim_to_clip` and have it in $PATH
-            command += ["maim-to-clip"]
+            # Requires to write one-line script `maim2clip` and have it in $PATH
+            command += ["maim2clip"]
         else:
             command += ["maim", f"$HOME/Pictures/{time.now().isoformat()}.png"]
 
@@ -102,6 +102,7 @@ keys = [
     Key("M-<Return>", lazy.spawn("kitty")),
     Key("M-e", lazy.spawn("kitty --title='ranger' sh -c 'ranger'")),
 
+
     Key("M-r", lazy.spawn("albert show")),
     Key("A-<Tab>", lazy.spawn("rofi -show window")),
 
@@ -124,11 +125,11 @@ keys = [
     Key("M-S-C-l", lazy.spawn("gnome-screensaver-command -l")),
 
     # Volume (hold shift for lighter adjustments)
-    Key("<XF86AudioLowerVolume>", lazy.spawn("amixer -c 0 -q set Master 5%-")),
-    Key("S-<XF86AudioLowerVolume>", lazy.spawn("amixer -c 0 -q set Master 1%-")),
-    Key("<XF86AudioRaiseVolume>", lazy.spawn("amixer -c 0 -q set Master 5%+")),
-    Key("S-<XF86AudioRaiseVolume>", lazy.spawn("amixer -c 0 -q set Master 1%+")),
-    Key("<XF86AudioMute>", lazy.spawn("amixer -D pulse set Master 1+ toggle")),
+    Key("<XF86AudioLowerVolume>", lazy.spawn("amixer -D default -q set Master 5%-")),
+    Key("S-<XF86AudioLowerVolume>", lazy.spawn("amixer -D default -q set Master 1%-")),
+    Key("<XF86AudioRaiseVolume>", lazy.spawn("amixer -D default -q set Master 5%+")),
+    Key("S-<XF86AudioRaiseVolume>", lazy.spawn("amixer -D default -q set Master 1%+")),
+    Key("<XF86AudioMute>", lazy.spawn("amixer -D default set Master 1+ toggle")),
 
     # Brightness (hold shift for lighter adjustments)
     Key("<XF86MonBrightnessUp>", lazy.spawn("light -A 5")),
