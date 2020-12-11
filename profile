@@ -44,5 +44,10 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
 source $HOME/.local/bin/virtualenvwrapper.sh
 
+
+# St-Imier screens setup
+xrandr --output HDMI1 --auto --pos 0x840 \
+	--output DP2 --auto --rotate left --pos 1920x0
+
 # Swap Ctrl and Caps Lock
 /usr/bin/setxkbmap -option "ctrl:swapcaps"

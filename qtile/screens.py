@@ -163,55 +163,55 @@ bar_widgets = [
     widget.Volume(
         **widget_defaults,
         **color_scheme,
-        device = "sysdefault",
+        device = "default",
     ),
 
     separator(right_looking = False),
     
     # Brightness icon and widget
-    widget.TextBox(
-        u'\uf5dd',
-        **icon_defaults,
-        **color_scheme,
-    ),
-    widget.Backlight(
-        **widget_defaults,
-        **color_scheme,
-        backlight_name='intel_backlight',
-        format='{percent:2.0%}'
-    ),
+    # widget.TextBox(
+    #     u'\uf5dd',
+    #     **icon_defaults,
+    #     **color_scheme,
+    # ),
+    # widget.Backlight(
+    #     **widget_defaults,
+    #     **color_scheme,
+    #     backlight_name='intel_backlight',
+    #     format='{percent:2.0%}'
+    # ),
 
-    separator(right_looking = False),
+    # separator(right_looking = False),
     
-    CustomBattery(
-        **icon_defaults,
-        **battery_text_widget_defaults,
-        **color_scheme,
-        battery=0
-    ),
-    widget.Battery(
-        **widget_defaults,
-        **battery_text_widget_defaults,
-        **color_scheme,
-        battery=0
-    ),
+    # CustomBattery(
+    #     **icon_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=0
+    # ),
+    # widget.Battery(
+    #     **widget_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=0
+    # ),
 
-    separator(right_looking = False),
+    # separator(right_looking = False),
 
-    CustomBattery(
-        **icon_defaults,
-        **battery_text_widget_defaults,
-        **color_scheme,
-        battery=1
-    ),
-    widget.Battery(
-        **widget_defaults,
-        **battery_text_widget_defaults,
-        **color_scheme,
-        battery=1
-    ),
+    # CustomBattery(
+    #     **icon_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=1
+    # ),
+    # widget.Battery(
+    #     **widget_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=1
+    # ),
 
-    separator(right_looking = False),
+    # separator(right_looking = False),
     
     widget.CPUGraph(
         **widget_defaults,
@@ -247,15 +247,6 @@ second_bar_widgets = [
         **widget_defaults,
         **color_scheme,
     ),
-
-    separator(right_looking = False),
-
-    widget.CurrentScreen(
-        **widget_defaults,
-        **color_scheme,
-        active_text = "active",
-        inactive_text = "inactive"
-    ),
 ]
 
 screens = [
@@ -265,36 +256,10 @@ screens = [
             24,
         ),
     ),
+    Screen(
+        top=bar.Bar(
+            second_bar_widgets,
+            24,
+        ),
+    ),
 ]
-
-def get_num_monitors():
-    num_monitors = 0
-    try:
-        display = xdisplay.Display()
-        screen = display.screen()
-        resources = screen.root.xrandr_get_screen_resources()
-
-        for output in resources.outputs:
-            monitor = display.xrandr_get_output_info(output, resources.config_timestamp)
-            preferred = False
-            if hasattr(monitor, "preferred"):
-                preferred = monitor.preferred
-            elif hasattr(monitor, "num_preferred"):
-                preferred = monitor.num_preferred
-            if preferred:
-                num_monitors += 1
-    except Exception:
-        # always setup at least one monitor
-        return 1
-    else:
-        return num_monitors
-
-if get_num_monitors() > 1:
-    screens.append(
-            Screen(
-                 top=bar.Bar(
-                 second_bar_widgets,
-                 24,
-            ),
-        )
-    )
