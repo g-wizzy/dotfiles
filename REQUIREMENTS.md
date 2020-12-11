@@ -8,6 +8,7 @@
 	- oh-my-zsh
 	- starship
 - vim
+	- vundle
 	- vim-plug
 - rofi
 - qtile
