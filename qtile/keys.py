@@ -100,7 +100,11 @@ keys = [
 
     # Programs shortcuts
     Key("M-<Return>", lazy.spawn("kitty")),
+<<<<<<< HEAD
+    Key("M-e", lazy.spawn("kitty sh -c 'ranger'")),
+=======
     Key("M-e", lazy.spawn("kitty --title='ranger' ranger")),
+>>>>>>> 29ec397b4befae280b63e2b3e1f078f575f39a0d
 
     Key("M-r", lazy.spawn("albert show")),
     Key("A-<Tab>", lazy.spawn("rofi -show window")),

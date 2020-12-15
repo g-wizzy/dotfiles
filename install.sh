@@ -31,7 +31,7 @@ ln -s $dir/albert ~/.config/albert
 
 # Install vscode
 mkdir -p "~/.config/Code - OSS/User"
-ln -s $dir/settings.json "~.config/Code - OSS/User/settings.json"
+ln -s $dir/settings.json "~/.config/Code - OSS/User/settings.json"
 
 # Install custom scripts
 ln -s $dir/scripts ~/scripts
