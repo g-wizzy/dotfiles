@@ -225,11 +225,17 @@ bar_widgets = [
     ),
 ]
 
-# reset colors
-separator()
-
 # Second screen bar
 second_bar_widgets = [
+
+    widget.CurrentLayoutIcon(
+        **widget_defaults,
+        **color_scheme,
+        scale=0.8,
+    ),
+
+    separator(),
+
     widget.GroupBox(
         **widget_defaults,
         **color_scheme,

@@ -102,7 +102,6 @@ keys = [
     Key("M-<Return>", lazy.spawn("kitty")),
     Key("M-e", lazy.spawn("kitty --title='ranger' sh -c 'ranger'")),
 
-
     Key("M-r", lazy.spawn("albert show")),
     Key("A-<Tab>", lazy.spawn("rofi -show window")),
 
