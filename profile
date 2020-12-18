@@ -44,5 +44,9 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
 source $HOME/.local/bin/virtualenvwrapper.sh
 
+# Home screens setup
+xrandr --output eDP-1 --auto --pos 0x840 \
+	--output DVI-I-1-1 --auto --rotate left --pos 1920x0
+
 # Swap Ctrl and Caps Lock
 /usr/bin/setxkbmap -option "ctrl:swapcaps"
