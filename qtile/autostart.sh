@@ -17,6 +17,3 @@ kdeconnect-indicator &
 
 # Albert launcher
 albert &
-
-# Wallpaper
-feh --bg-scale $HOME/Pictures/Wallpapers/eraserhead.png &

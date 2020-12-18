@@ -255,17 +255,24 @@ second_bar_widgets = [
     ),
 ]
 
+from os.path import expanduser
+wallpaper = expanduser('~/Pictures/Wallpapers/eraserhead.png')
+
 screens = [
     Screen(
         top=bar.Bar(
             bar_widgets,
             24,
         ),
+        wallpaper=wallpaper,
+        wallpaper_mode='fill'
     ),
     Screen(
         top=bar.Bar(
             second_bar_widgets,
             24,
         ),
+        wallpaper=wallpaper,
+        wallpaper_mode='fill'
     ),
 ]
