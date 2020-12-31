@@ -27,6 +27,8 @@ def albert_holds_focus(window):
     if (
         previous_focus
         and
+        previous_focus != window
+        and
         previous_focus.name == "Albert"
     ):
         previous_focus.cmd_focus()
