@@ -2,7 +2,7 @@ from libqtile.config import EzKey as Key, EzDrag as Drag, EzClick as Click
 from libqtile.lazy import lazy
 
 from datetime import datetime as time
-import subprocess
+import subprocess, os
 
 # BSP resizing taken from https://github.com/qtile/qtile/issues/1402
 def resize(qtile, direction):
@@ -59,10 +59,10 @@ def screenshot(to_clip = False, rect_select = False):
             # Requires to write one-line script `maim2clip` and have it in $PATH
             command += ["maim2clip"]
         else:
-            command += ["maim", f"$HOME/Pictures/{time.now().isoformat()}.png"]
+            command += ["maim", f"{os.path.expanduser('~/Pictures')}/{time.now().isoformat()}.png"]
 
         if rect_select:
-            command += ["-s"]
+            command += ["-s", "-u"]
 
         subprocess.run(command)
 
@@ -104,7 +104,7 @@ keys = [
 
     # Programs shortcuts
     Key("M-<Return>", lazy.spawn("kitty")),
-    Key("M-e", lazy.spawn("kitty --title='ranger' sh -c 'ranger'")),
+    Key("M-e", lazy.spawn("kitty --title='ranger' zsh -c 'ranger'")),
 
     Key("M-r", lazy.spawn("albert show")),
     Key("A-<Tab>", lazy.spawn("rofi -show window")),
@@ -118,7 +118,7 @@ keys = [
     Key("<Print>", lazy.function(screenshot())),
     Key("C-<Print>", lazy.function(screenshot(to_clip = True))),
     Key("S-<Print>", lazy.function(screenshot(rect_select = True))),
-    Key("C-S-<Print>", lazy.function(screenshot(to_clip = True, rect_select = False))),
+    Key("C-S-<Print>", lazy.function(screenshot(to_clip = True, rect_select = True))),
 
 
     Key("M-w", lazy.window.kill()),
