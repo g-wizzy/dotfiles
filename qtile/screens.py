@@ -2,7 +2,7 @@ from libqtile.config import Screen
 from libqtile import widget, bar
 
 from custom_battery_widget import CustomBattery
-from color_themes import nord_theme as theme
+from color_themes import gruvbox_theme as theme
 
 from Xlib import display as xdisplay
 
@@ -75,11 +75,12 @@ group_box_widget_defaults = dict(
     inactive=theme.bg2,
     # Current screen colors
     highlight_method='line',
-    highlight_color=theme.highlight3,
+    highlight_color=theme.bg4,
     this_current_screen_border=theme.alert3,
+    this_screen_border=theme.bg3,
     # Urgent colors
     urgent_alert_method="block",
-    urgent_border=theme.alert2
+    urgent_border=theme.alert0
 )
 
 battery_text_widget_defaults = dict(
@@ -96,6 +97,11 @@ bar_widgets = [
         **widget_defaults,
         **color_scheme,
         scale=0.8,
+    ),
+
+    widget.WindowCount(
+        **widget_defaults,
+        **color_scheme,
     ),
 
     separator(),
@@ -116,7 +122,7 @@ bar_widgets = [
     widget.WindowName(
         **widget_defaults,
         **color_scheme,
-        show_state=False
+        format='{name}'
     ),
 
     # Note: requires to change the default Ubuntu command in libqtile.widget.CheckUpdates
@@ -216,11 +222,11 @@ bar_widgets = [
     widget.CPUGraph(
         **widget_defaults,
         **color_scheme,
-        frequency=0.33,
-        samples=300,
+        frequency=0.5,
+        samples=50,
         border_width=0,
         line_width=0,
-        fill_color=theme.highlight1,
+        fill_color=theme.highlight2,
         margin_x=12
     ),
 ]
@@ -232,6 +238,11 @@ second_bar_widgets = [
         **widget_defaults,
         **color_scheme,
         scale=0.8,
+    ),
+
+    widget.WindowCount(
+        **widget_defaults,
+        **color_scheme,
     ),
 
     separator(),
@@ -256,7 +267,7 @@ second_bar_widgets = [
 ]
 
 from os.path import expanduser
-wallpaper = expanduser('~/Pictures/Wallpapers/eraserhead.png')
+wallpaper = expanduser('~/Pictures/Wallpapers/eraserhead-original.png')
 
 screens = [
     Screen(

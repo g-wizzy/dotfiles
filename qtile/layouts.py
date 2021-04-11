@@ -1,9 +1,9 @@
 from libqtile import layout
 
-from color_themes import nord_theme as theme
+from color_themes import gruvbox_theme as theme
 
 layout_defaults = dict(
-    margin = 0,
+    margin = 3,
     border_width = 3,
     border_normal=theme.bg0,
     border_focus=theme.highlight0,
