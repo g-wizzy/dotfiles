@@ -6,6 +6,9 @@ picom &
 # Gnome Screensaver (so that it can be called with gnome-screensaver-command -l)
 gnome-screensaver &
 
+# caffeine
+caffeine -a &
+
 # Udiskie (no notifications, tray icon)
 udiskie -N &
 
