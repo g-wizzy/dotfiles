@@ -16,6 +16,7 @@ floating_layout_defaults["border_width"] = 0
 layouts = [
     layout.Bsp(name="bsp", **layout_defaults),
     layout.Max(**layout_defaults),
+    layout.VerticalTile(**layout_defaults),
 
     # layout.Stack(num_stacks=2),
     # layout.Columns(),
@@ -25,7 +26,6 @@ layouts = [
     # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
-    # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
 

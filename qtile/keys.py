@@ -71,6 +71,10 @@ def screenshot(to_clip = False, rect_select = False):
 keys = [
     # Layout change
     Key("M-<Tab>", lazy.next_layout()),
+
+    ## Horizontal layout
+    Key("M-m", lazy.layout.maximize()),
+    Key("M-n", lazy.layout.normalize()),
     
     ## BSP Layout
     # Change focus
