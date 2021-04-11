@@ -14,6 +14,7 @@
 - qtile
 - picom
 - gnome-screensaver
+- caffeine-ng
 - udiskie
 - network-manager-applet
 - kdeconnect
