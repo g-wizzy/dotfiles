@@ -127,18 +127,22 @@ keys = [
     Key("M-S-C-q", lazy.spawn("shutdown 0")),
     Key("M-S-C-l", lazy.spawn("gnome-screensaver-command -l")),
 
-    # Volume (hold shift for lighter adjustments)
+    # Volume (hold ctrl for lighter adjustments, shift for large jumps)
     Key("<XF86AudioLowerVolume>", lazy.spawn("amixer -D default -q set Master 5%-")),
-    Key("S-<XF86AudioLowerVolume>", lazy.spawn("amixer -D default -q set Master 1%-")),
+    Key("C-<XF86AudioLowerVolume>", lazy.spawn("amixer -D default -q set Master 1%-")),
+    Key("S-<XF86AudioLowerVolume>", lazy.spawn("amixer -D default -q set Master 20%-")),
     Key("<XF86AudioRaiseVolume>", lazy.spawn("amixer -D default -q set Master 5%+")),
-    Key("S-<XF86AudioRaiseVolume>", lazy.spawn("amixer -D default -q set Master 1%+")),
+    Key("C-<XF86AudioRaiseVolume>", lazy.spawn("amixer -D default -q set Master 1%+")),
+    Key("S-<XF86AudioRaiseVolume>", lazy.spawn("amixer -D default -q set Master 20%+")),
     Key("<XF86AudioMute>", lazy.spawn("amixer -D default set Master 1+ toggle")),
 
     # Brightness (hold shift for lighter adjustments)
     Key("<XF86MonBrightnessUp>", lazy.spawn("light -A 5")),
-    Key("S-<XF86MonBrightnessUp>", lazy.spawn("light -A 1")),
+    Key("C-<XF86MonBrightnessUp>", lazy.spawn("light -A 1")),
+    Key("S-<XF86MonBrightnessUp>", lazy.spawn("light -A 20")),
     Key("<XF86MonBrightnessDown>", lazy.spawn("light -U 5")),
-    Key("S-<XF86MonBrightnessDown>", lazy.spawn("light -U 1")),
+    Key("C-<XF86MonBrightnessDown>", lazy.spawn("light -U 1")),
+    Key("S-<XF86MonBrightnessDown>", lazy.spawn("light -U 20")),
 
     # Multi-screen test (not very convincing)
     Key("M-<Escape>", lazy.next_screen()),
