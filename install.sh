@@ -12,8 +12,8 @@ ln -s $dir/profile ~/.profile
 # Install zsh profile
 ln -s $dir/zshrc ~/.zshrc
 
-# Install kitty
-ln -s $dir/kitty ~/.config/kitty
+# Configure kitty
+ln -s $dir/kitty ~/.config/
 
 # Install starship
 ln -s ~/dotfiles/starship.toml ~/.config/starship.toml
