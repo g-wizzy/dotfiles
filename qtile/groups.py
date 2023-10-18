@@ -1,9 +1,54 @@
-from libqtile.config import Group, EzKey as Key
+from libqtile.config import Group, Match, EzKey as Key, ScratchPad, DropDown
 from libqtile.lazy import lazy
 
 from keys import keys
+from layouts import default_layouts, chat_layouts
 
-groups = [Group(i) for i in "asdyxc"]
+
+groups = [
+    Group(
+        'a',
+        matches=[Match(wm_class=["firefox"])],
+        label=u'\uf269',
+        layout=default_layouts
+    ),
+    Group(
+        's',
+        matches=[Match(wm_class=["vscodium"])],
+        label=u'\uf668',
+        layout=default_layouts
+    ),
+    Group(
+        'd',
+        label=u'\uf120',
+        layout=default_layouts
+    ),
+    Group(
+        'y',
+        label=u'\uf120',
+        layout=default_layouts
+    ),
+    Group(
+        'x',
+        matches=[Match(wm_class=[
+            "microsoft teams - preview",
+            "prospect mail"
+        ])],
+        label=u'\U000f02bb',
+        layout=default_layouts
+    ),
+    Group(
+        'c',
+        matches=[Match(wm_class=[
+            "telegram-desktop",
+            "discord",
+            "threema"
+        ])],
+        label=u'\uf867',
+        layouts=chat_layouts
+    ),
+]
+
 
 for i in groups:
     keys.extend([
@@ -13,3 +58,4 @@ for i in groups:
         # mod1 + shift + letter of group = switch to & move focused window to group
         Key(f"M-S-{i.name}", lazy.window.togroup(i.name, switch_group=True)),
     ])
+
