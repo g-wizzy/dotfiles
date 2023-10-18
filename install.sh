@@ -27,8 +27,8 @@ ln -s $dir/Xresources ~/.Xresources
 # Install picom configuration
 ln -s $dir/picom.conf ~/.config/picom.conf
 
-# Install rofi
-ln -s $dir/rofi ~/.config/rofi
+# Configure rofi
+ln -s $dir/rofi ~/.config/
 
 
 # Install vscode
