@@ -1,0 +1,72 @@
+{
+  "git.closeDiffOnOperation": true,
+  "window.menuBarVisibility": "toggle",
+  "editor.fontFamily": "Victor Mono Semibold",
+  "editor.fontLigatures": true,
+  "editor.mouseWheelZoom": true,
+  "editor.renderWhitespace": "boundary",
+  "zenMode.hideLineNumbers": false,
+  "editor.wordWrap": "bounded",
+  "editor.wordWrapColumn": 120,
+  "editor.rulers": [88, 120],
+  "editor.wrappingIndent": "indent",
+  "[markdown]": {
+    "editor.wordWrap": "bounded",
+    "editor.wrappingIndent": "same"
+  },
+  "files.exclude": {
+    "{,.}venv": true,
+    "**/__pycache__": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "files.autoSave": "onFocusChange",
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.hover.delay": 200,
+  "editor.cursorBlinking": "phase",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.cursorSurroundingLines": 1,
+  "editor.minimap.renderCharacters": false,
+  "editor.minimap.scale": 2,
+  "workbench.colorTheme": "Gruvbox Material Dark",
+  "explorer.autoReveal": false,
+  "terminal.external.linuxExec": "kitty",
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+  "git.supportCancellation": true,
+  "workbench.startupEditor": "none",
+  "explorer.confirmDelete": false,
+  "python.terminal.activateEnvironment": true,
+  "python.languageServer": "Default",
+  "python.analysis.autoImportCompletions": false,
+  "rust-analyzer.checkOnSave.command": "clippy",
+  "explorer.confirmDragAndDrop": false,
+  "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
+  "git.confirmSync": false,
+  "editor.bracketPairColorization.enabled": false,
+  "codesnap.transparentBackground": true,
+  "codesnap.showWindowControls": false,
+  "codesnap.shutterAction": "copy",
+  "codesnap.showWindowTitle": true,
+  "codesnap.boxShadow": "rgba(0, 0, 0, 0) 0px 20px 68px",
+  "workbench.editorAssociations": {
+    "*.pickle": "default"
+  },
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.lineHeight": 1.8,
+  "jupyter.askForKernelRestart": false,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "telemetry.telemetryLevel": "off",
+  "C_Cpp.default.cppStandard": "c++20",
+  "editor.stickyScroll.enabled": true,
+  "editor.stickyScroll.maxLineCount": 5,
+  "window.zoomLevel": 1
+}
