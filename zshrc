@@ -10,8 +10,29 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="spaceship"
 
-SPACESHIP_PROMPT_ADD_NEWLINE="false"
+SPACESHIP_PROMPT_ORDER=(
+	user
+	dir
+	host
+	git
+	node
+	python
+	venv
+	rust
+	docker
+	docker_compose
+	exec_time
+	line_sep
+	jobs
+	char
+)
+SPACESHIP_PROMPT_ASYNC=false
+SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL="❯ "
+
+SPACESHIP_RPROMPT_ORDER=(time)
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_RPROMPT_SEPARATE_LINE=false
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
