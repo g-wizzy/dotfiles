@@ -1,6 +1,7 @@
 #!/bin/bash
 
 dir=~/dotfiles
+mkdir -p ~/.config
 
 # Install vimrc
 ln -s $dir/vimrc ~/.vimrc
@@ -29,8 +30,6 @@ ln -s $dir/picom.conf ~/.config/picom.conf
 # Install rofi
 ln -s $dir/rofi ~/.config/rofi
 
-# Install albert
-ln -s $dir/albert ~/.config/albert
 
 # Install vscode
 mkdir -p "~/.config/Code - OSS/User"
