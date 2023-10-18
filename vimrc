@@ -7,7 +7,7 @@
 
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
-runtime! debian.vim
+runtime! archlinux.vim
 
 " Vim will load $VIMRUNTIME/defaults.vim if the user does not have a vimrc.
 " This happens after /etc/vim/vimrc(.local) are loaded, so it will override
@@ -40,19 +40,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 set nocompatible
 filetype off
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'ycm-core/YouCompleteMe'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 set showcmd		" Show (partial) command in status line.
@@ -81,14 +68,4 @@ inoremap <A-j> <Esc>:m+1<CR>==g1
 inoremap <A-k> <Esc>:m-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
-
-call plug#begin(expand('~/.vim/plugged'))
-
-call plug#end()
-
-Plug 'arcticicestudio/nord-vim'
-
-call plug#end()
-
-colorscheme nord
 
