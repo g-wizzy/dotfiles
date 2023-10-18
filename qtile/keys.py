@@ -104,28 +104,33 @@ keys = [
 
     # Programs shortcuts
     Key("M-<Return>", lazy.spawn("kitty")),
-    Key("M-e", lazy.spawn("kitty --title='ranger' zsh -c 'ranger'")),
+    Key("M-e", lazy.spawn("kitty --title='ranger' zsh -c 'unset LINES; unset COLUMNS; ranger'")),
 
-    Key("M-r", lazy.spawn("albert show")),
-    Key("A-<Tab>", lazy.spawn("rofi -show window")),
+    Key("M-r", lazy.spawn("rofi -modi drun,ssh -show drun")),
+    Key("A-<Tab>", lazy.spawn("rofi -modi windowcd -show windowcd")),
 
     Key("M-f", lazy.spawn("firefox")),
     Key("M-S-f", lazy.spawn("firefox --private-window")),
+    Key("M-v", lazy.spawn("vscodium")),
 
-    Key("<XF86Calculator>", lazy.spawn("gnome-calculator")),
-    
     # Screen capture (Shift => selection, Ctrl => to clipboard)
-    Key("<Print>", lazy.function(screenshot())),
-    Key("C-<Print>", lazy.function(screenshot(to_clip = True))),
-    Key("S-<Print>", lazy.function(screenshot(rect_select = True))),
-    Key("C-S-<Print>", lazy.function(screenshot(to_clip = True, rect_select = True))),
+    Key("<F12>", lazy.function(screenshot())),
+    Key("C-<F12>", lazy.function(screenshot(to_clip = True))),
+    Key("S-<F12>", lazy.function(screenshot(rect_select = True))),
+    Key("C-S-<F12>", lazy.function(screenshot(to_clip = True, rect_select = True))),
 
 
     Key("M-w", lazy.window.kill()),
     Key("M-C-r", lazy.restart()),
     Key("M-C-q", lazy.shutdown()),
     Key("M-S-C-q", lazy.spawn("shutdown 0")),
-    Key("M-S-C-l", lazy.spawn("gnome-screensaver-command -l")),
+    Key("M-S-C-r", lazy.spawn("reboot")),
+    Key("M-S-C-l", lazy.spawn("xscreensaver-command -lock")),
+
+    Key("M-t", lazy.group["scratchpad"].dropdown_toggle("term")),
+    Key("M-p", lazy.group["scratchpad"].dropdown_toggle("python")),
+
+    Key("M-C-S-p", lazy.spawn("toggle-display")),
 
     # Volume (hold ctrl for lighter adjustments, shift for large jumps)
     Key("<XF86AudioLowerVolume>", lazy.spawn("amixer -D default -q set Master 5%-")),
@@ -143,11 +148,6 @@ keys = [
     Key("<XF86MonBrightnessDown>", lazy.spawn("light -U 5")),
     Key("C-<XF86MonBrightnessDown>", lazy.spawn("light -U 1")),
     Key("S-<XF86MonBrightnessDown>", lazy.spawn("light -U 20")),
-
-    # Multi-screen test (not very convincing)
-    Key("M-<Escape>", lazy.next_screen()),
-    Key("M-p", lazy.spawn("display-select")),
-    Key("M-S-p", lazy.spawn("sh -c ~/scripts/rotate_secondary_display.sh")),
 ]
 
 mouse = [

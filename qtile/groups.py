@@ -59,3 +59,26 @@ for i in groups:
         Key(f"M-S-{i.name}", lazy.window.togroup(i.name, switch_group=True)),
     ])
 
+dropdown_defaults = {
+    "x": -0.001,
+    "y": 0.65,
+    "opacity": 0.9,
+    "width": 1.002,
+}
+
+groups.append(
+    ScratchPad(
+        "scratchpad", [
+            DropDown(
+                "term", 
+                "/usr/bin/kitty",
+                **dropdown_defaults
+            ),
+            DropDown(
+                "python", 
+                "/usr/bin/kitty python",
+                **dropdown_defaults
+            ),
+        ]
+    )
+)

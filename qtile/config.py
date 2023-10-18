@@ -38,9 +38,8 @@ main = None
 follow_mouse_focus = True
 bring_front_click = True
 cursor_warp = False
-
 auto_fullscreen = True
-focus_on_window_activation = "smart"
+focus_on_window_activation = "never"
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the

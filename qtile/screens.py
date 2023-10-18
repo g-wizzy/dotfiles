@@ -6,6 +6,9 @@ from color_themes import gruvbox_theme as theme
 
 from Xlib import display as xdisplay
 
+from pathlib import Path
+from os.path import expanduser
+from random import choice
 
 
 color_schemes = [
@@ -48,9 +51,6 @@ def separator(right_looking = True):
 
         return ret
 
-# Determines the color scheme on the leftmost widget
-color_scheme = color_schemes[0]
-separator.current_scheme = 0
 
 separator_defaults = dict(
     font='Victor Mono',
@@ -64,12 +64,15 @@ widget_defaults = dict(
     fontsize=12,
     padding=6,
 )
-extension_defaults = widget_defaults.copy()
 
 icon_defaults = widget_defaults.copy()
-icon_defaults["fontsize"] = 32
+icon_defaults["fontsize"] = 24
 
-group_box_widget_defaults = dict(
+group_box_widget_defaults = icon_defaults | dict(
+    center_aligned=False,
+    padding=9,
+    margin_x=-2,
+    margin_y=-1,
     # Text colors
     active=theme.txt0,
     inactive=theme.bg2,
@@ -91,23 +94,20 @@ battery_text_widget_defaults = dict(
     show_short_text=False
 )
 
-bar_widgets = [
+# Determines the color scheme on the leftmost widget
+color_scheme = color_schemes[0]
+separator.current_scheme = 0
 
+bar_widgets = [
     widget.CurrentLayoutIcon(
         **widget_defaults,
         **color_scheme,
         scale=0.8,
     ),
 
-    widget.WindowCount(
-        **widget_defaults,
-        **color_scheme,
-    ),
-
     separator(),
 
     widget.GroupBox(
-        **widget_defaults,
         **color_scheme,
         **group_box_widget_defaults
     ),
@@ -132,7 +132,7 @@ bar_widgets = [
     widget.CheckUpdates(
         **widget_defaults,
         **color_scheme,
-        distro="Arch",
+        distro="Arch_checkupdates",
         colour_no_updates=color_scheme["foreground"],
         colour_have_updates=theme.alert1,
     ),
@@ -175,49 +175,49 @@ bar_widgets = [
     separator(right_looking = False),
     
     # Brightness icon and widget
-    widget.TextBox(
-        u'\uf5dd',
-        **icon_defaults,
-        **color_scheme,
-    ),
-    widget.Backlight(
-        **widget_defaults,
-        **color_scheme,
-        backlight_name='intel_backlight',
-        format='{percent:2.0%}'
-    ),
+    # widget.TextBox(
+    #     u'\uf5dd',
+    #     **icon_defaults,
+    #     **color_scheme,
+    # ),
+    # widget.Backlight(
+    #     **widget_defaults,
+    #     **color_scheme,
+    #     backlight_name='intel_backlight',
+    #     format='{percent:2.0%}'
+    # ),
 
-    separator(right_looking = False),
+    # separator(right_looking = False),
     
-    CustomBattery(
-        **icon_defaults,
-        **battery_text_widget_defaults,
-        **color_scheme,
-        battery=0
-    ),
-    widget.Battery(
-        **widget_defaults,
-        **battery_text_widget_defaults,
-        **color_scheme,
-        battery=0
-    ),
+    # CustomBattery(
+    #     **icon_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=0
+    # ),
+    # widget.Battery(
+    #     **widget_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=0
+    # ),
 
-    separator(right_looking = False),
+    # separator(right_looking = False),
 
-    CustomBattery(
-        **icon_defaults,
-        **battery_text_widget_defaults,
-        **color_scheme,
-        battery=1
-    ),
-    widget.Battery(
-        **widget_defaults,
-        **battery_text_widget_defaults,
-        **color_scheme,
-        battery=1
-    ),
+    # CustomBattery(
+    #     **icon_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=1
+    # ),
+    # widget.Battery(
+    #     **widget_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=1
+    # ),
 
-    separator(right_looking = False),
+    # separator(right_looking = False),
     
     widget.CPUGraph(
         **widget_defaults,
@@ -240,15 +240,9 @@ second_bar_widgets = [
         scale=0.8,
     ),
 
-    widget.WindowCount(
-        **widget_defaults,
-        **color_scheme,
-    ),
-
     separator(),
 
     widget.GroupBox(
-        **widget_defaults,
         **color_scheme,
         **group_box_widget_defaults
     ),
@@ -263,11 +257,104 @@ second_bar_widgets = [
     widget.WindowName(
         **widget_defaults,
         **color_scheme,
+        format='{name}'
+    ),
+
+    # Note: requires to change the default Ubuntu command in libqtile.widget.CheckUpdates
+    # from `aptitude search ~U`
+    # into `apt list --upgradable`
+    # and change the number of lines to substract from 0 to 1
+    widget.CheckUpdates(
+        **widget_defaults,
+        **color_scheme,
+        distro="Arch",
+        colour_no_updates=color_scheme["foreground"],
+        colour_have_updates=theme.alert1,
+    ),
+
+    separator(right_looking = False),
+
+    widget.Clock(
+        **widget_defaults,
+        **color_scheme,
+        format='%H:%M:%S %a %d.%m.%Y',
+    ),
+
+    separator(right_looking = False),
+
+    # Volume icon and widget
+    widget.TextBox(
+        u'\ufa7d',
+        **icon_defaults,
+        **color_scheme,
+    ),
+    widget.Volume(
+        **widget_defaults,
+        **color_scheme,
+        device = "default",
+    ),
+
+    separator(right_looking = False),
+    
+    # Brightness icon and widget
+    # widget.TextBox(
+    #     u'\uf5dd',
+    #     **icon_defaults,
+    #     **color_scheme,
+    # ),
+    # widget.Backlight(
+    #     **widget_defaults,
+    #     **color_scheme,
+    #     backlight_name='intel_backlight',
+    #     format='{percent:2.0%}'
+    # ),
+
+    # separator(right_looking = False),
+    
+    # CustomBattery(
+    #     **icon_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=0
+    # ),
+    # widget.Battery(
+    #     **widget_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=0
+    # ),
+
+    # separator(right_looking = False),
+
+    # CustomBattery(
+    #     **icon_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=1
+    # ),
+    # widget.Battery(
+    #     **widget_defaults,
+    #     **battery_text_widget_defaults,
+    #     **color_scheme,
+    #     battery=1
+    # ),
+
+    # separator(right_looking = False),
+    
+    widget.CPUGraph(
+        **widget_defaults,
+        **color_scheme,
+        frequency=0.5,
+        samples=50,
+        border_width=0,
+        line_width=0,
+        fill_color=theme.highlight2,
+        margin_x=12
     ),
 ]
 
-from os.path import expanduser
-wallpaper = expanduser('~/Pictures/Wallpapers/eraserhead-original.png')
+wallpaper_folder = Path(expanduser('~/Pictures/Wallpapers/'))
+wallpaper = choice(list(wallpaper_folder.iterdir()))
 
 screens = [
     Screen(
@@ -275,15 +362,18 @@ screens = [
             bar_widgets,
             24,
         ),
-        wallpaper=wallpaper,
-        wallpaper_mode='fill'
+        wallpaper=wallpaper.absolute(),
+        wallpaper_mode="fill"
     ),
-    Screen(
-        top=bar.Bar(
-            second_bar_widgets,
-            24,
-        ),
-        wallpaper=wallpaper,
-        wallpaper_mode='fill'
-    ),
+    # Screen(
+    #     top=bar.Bar(
+    #         second_bar_widgets,
+    #         24,
+    #     ),
+    #     wallpaper=wallpaper,
+    #     wallpaper_mode='fill'
+    # ),
 ]
+
+reconfigure_screens = True
+
