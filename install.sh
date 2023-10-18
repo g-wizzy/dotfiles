@@ -3,28 +3,22 @@
 dir=~/dotfiles
 mkdir -p ~/.config
 
-# Install vimrc
+# Configure vimrc
 ln -s $dir/vimrc ~/.vimrc
 
-# InstallS profile
+# Configure profile
 ln -s $dir/profile ~/.profile
 
-# Install zsh profile
+# Configure zsh profile
 ln -s $dir/zshrc ~/.zshrc
 
 # Configure kitty
 ln -s $dir/kitty ~/.config/
 
-# Install starship
-ln -s ~/dotfiles/starship.toml ~/.config/starship.toml
+# Configure qtile config
+ln -s $dir/qtile ~/.config/
 
-# Install qtile config
-ln -s $dir/qtile ~/.config/qtile
-
-# Install .Xresources (fix cursor size)
-ln -s $dir/Xresources ~/.Xresources
-
-# Install picom configuration
+# Configure picom
 ln -s $dir/picom.conf ~/.config/picom.conf
 
 # Configure rofi
@@ -34,7 +28,6 @@ ln -s $dir/rofi ~/.config/
 mkdir -p ~/.config/Code\ -\ OSS/User
 ln -s $dir/vscodium-settings.json "$HOME/.config/Code - OSS/User/settings.json"
 
-
-# Install custom scripts
-ln -s $dir/scripts ~/scripts
+# Configure custom scripts
+ln -s $dir/scripts $HOME
 

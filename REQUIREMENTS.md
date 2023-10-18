@@ -5,24 +5,20 @@
 - ranger
 - bat
 - zsh
-	- oh-my-zsh
-	- starship
+  - oh-my-zsh
+  - spaceship
 - vim
-	- vundle
-	- vim-plug
 - rofi
 - qtile
 - picom
-- gnome-screensaver
+- xscreensaver
 - caffeine-ng
 - udiskie
 - network-manager-applet
 - kdeconnect
-- albert
 - feh
 - maim
-- vscode
+- vscodium
 - lxappearance
 - htop
 - neofetch
-
