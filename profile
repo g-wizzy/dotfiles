@@ -8,9 +8,6 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# numlock
-numlockx on
-
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -34,21 +31,21 @@ if [ -d "$HOME/scripts" ] ; then
     PATH="$HOME/scripts:$PATH"
 fi
 
+export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
+
 export EDITOR="/usr/bin/vim"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-export BAT_THEME="Solarized (light)"
+if xhost >& /dev/null ; then
+	
+	# numlock
+	numlockx on
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Projects
-source $HOME/.local/bin/virtualenvwrapper.sh
+	# Swap Ctrl and Caps Lock
+	/usr/bin/setxkbmap -option "ctrl:swapcaps"
 
-# Home screens setup
-if [[ ! -z `xrandr -q | grep "DVI-I-1-1 connected"` ]] ; then
-	xrandr --output eDP-1 --auto --pos 0x840 \
-	       --output DVI-I-1-1 --auto --rotate left --pos 1920x0
 fi
 
-# Swap Ctrl and Caps Lock
-/usr/bin/setxkbmap -option "ctrl:swapcaps"
+. "$HOME/.cargo/env"
+

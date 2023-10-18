@@ -22,3 +22,4 @@
 - lxappearance
 - htop
 - neofetch
+- cargo

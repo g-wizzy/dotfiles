@@ -1,5 +1,4 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# If you come from bash you might have to change your $PATH.  # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -94,16 +93,15 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	git
+	rust
 	alias-finder
-	thefuck
+	alias-tips
 	extract
 	colored-man-pages
-	screen
 	pip
+	poetry
+	pyenv
 	virtualenv
-	virtualenvwrapper
-	vscode
-	zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -133,18 +131,22 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Aliases
+
+alias l="exa -la --git --group-directories-first"
 alias py="python"
 alias cp="rsync -r --progress"
+alias -s pdf=firefox
+alias lg="lazygit"
+alias sv="source venv/bin/activate"
 
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 source $HOME/.profile
 
-eval $(thefuck --alias)
-
-ZSH_AUTOSUGGEST_STRATEGY=completion
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-ZSH_AUTOSUGGEST_MANUAL_REBIND=true
-ZSH_AUTOSUGGEST_COMPLETION_IGNORE="pacman *|git *"
+# Prevent window resizing from destroying ranger
+unset COLUMNS
+unset LINES
 
