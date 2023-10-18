@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Compton for transparency
+# Disable HDMI output
+xrandr --output HDMI-0 --off
+
+# Picom for transparency
 picom &
 
-# Gnome Screensaver (so that it can be called with gnome-screensaver-command -l)
-gnome-screensaver &
-
-# caffeine
-caffeine -a &
+# xscreensaver (so that it can be called with xscreensaver-command -l)
+xscreensaver --no-splash &
 
 # Udiskie (no notifications, tray icon)
-udiskie -N &
+udiskie -N -t &
 
 # Network applet
 nm-applet &
@@ -18,5 +18,6 @@ nm-applet &
 # KDEConnect applet
 kdeconnect-indicator &
 
-# Albert launcher
-albert &
+# Redshift
+redshift-gtk &
+
