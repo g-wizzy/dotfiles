@@ -10,7 +10,7 @@
   "editor.wordWrapColumn": 120,
   "editor.rulers": [88, 120],
   "editor.wrappingIndent": "indent",
-  "[markdown]": {
+  "[markdown]": { 
     "editor.wordWrap": "bounded",
     "editor.wrappingIndent": "same"
   },
@@ -45,11 +45,6 @@
   "editor.wordSeparators": "`~!@#$%^&*()-=+[{]}\\|;:'\",.<>/?_",
   "git.confirmSync": false,
   "editor.bracketPairColorization.enabled": false,
-  "codesnap.transparentBackground": true,
-  "codesnap.showWindowControls": false,
-  "codesnap.shutterAction": "copy",
-  "codesnap.showWindowTitle": true,
-  "codesnap.boxShadow": "rgba(0, 0, 0, 0) 0px 20px 68px",
   "workbench.editorAssociations": {
     "*.pickle": "default"
   },
@@ -65,7 +60,6 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "telemetry.telemetryLevel": "off",
-  "C_Cpp.default.cppStandard": "c++20",
   "editor.stickyScroll.enabled": true,
   "editor.stickyScroll.maxLineCount": 5,
   "window.zoomLevel": 1
