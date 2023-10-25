@@ -27,6 +27,9 @@ ln -s $dir/picom.conf ~/.config/picom.conf
 # Configure rofi
 ln -s $dir/rofi ~/.config/
 
+# Configure redshift
+ln -s $dir/redshift.conf ~/.config/
+
 # Configure vscode
 mkdir -p ~/.config/Code\ -\ OSS/User
 ln -s $dir/vscodium-settings.json "$HOME/.config/Code - OSS/User/settings.json"
