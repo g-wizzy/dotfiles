@@ -69,10 +69,8 @@ icon_defaults = widget_defaults.copy()
 icon_defaults["fontsize"] = 24
 
 group_box_widget_defaults = icon_defaults | dict(
-    center_aligned=False,
-    padding=9,
-    margin_x=-2,
-    margin_y=-1,
+    fontsize=20,
+    center_aligned=True,
     # Text colors
     active=theme.txt0,
     inactive=theme.bg2,
@@ -125,14 +123,10 @@ bar_widgets = [
         format='{name}'
     ),
 
-    # Note: requires to change the default Ubuntu command in libqtile.widget.CheckUpdates
-    # from `aptitude search ~U`
-    # into `apt list --upgradable`
-    # and change the number of lines to substract from 0 to 1
     widget.CheckUpdates(
         **widget_defaults,
         **color_scheme,
-        distro="Arch_checkupdates",
+        distro="Arch",
         colour_no_updates=color_scheme["foreground"],
         colour_have_updates=theme.alert1,
     ),
@@ -162,7 +156,7 @@ bar_widgets = [
 
     # Volume icon and widget
     widget.TextBox(
-        u'\ufa7d',
+        u'\U000f057e',
         **icon_defaults,
         **color_scheme,
     ),
@@ -260,10 +254,6 @@ second_bar_widgets = [
         format='{name}'
     ),
 
-    # Note: requires to change the default Ubuntu command in libqtile.widget.CheckUpdates
-    # from `aptitude search ~U`
-    # into `apt list --upgradable`
-    # and change the number of lines to substract from 0 to 1
     widget.CheckUpdates(
         **widget_defaults,
         **color_scheme,

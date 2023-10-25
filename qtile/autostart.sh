@@ -20,4 +20,3 @@ kdeconnect-indicator &
 
 # Redshift
 redshift-gtk &
-
