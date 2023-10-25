@@ -12,6 +12,9 @@ ln -s $dir/ranger ~/.config/ranger
 # Configure profile
 ln -s $dir/profile ~/.profile
 
+# Configure X11
+ln -s $dir/xinitrc ~/.xinitrc
+
 # Configure zsh profile
 ln -s $dir/zshrc ~/.zshrc
 
