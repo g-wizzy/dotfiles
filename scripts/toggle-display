@@ -1,20 +1,15 @@
 #!/bin/bash
-
 # This script is only intended to run on my home setup, with output names being hardcoded and all.
 # Note to self: remember to change this whenever the setup changes.
 
-MONITOR=DP-0
+MONITOR=DP-4
 TV=HDMI-0
 
-if xrandr | grep "$MONITOR connected primary"; then
-	# Disable monitor, use TV
-	echo Disabling the monitor
-	xrandr --output "$TV" --primary --mode 1920x1080
-	xrandr --output "$MONITOR" --off
-else
-	# Disable TV, use monitor
+if xrandr | grep "$TV connected primary"; then
 	echo Disabling the TV
-	xrandr --output "$MONITOR" --primary --auto
-	xrandr --output "$TV" --off
+	xrandr --output "$TV" --off --output "$MONITOR" --auto --primary
+else
+	echo Disabling the monitor
+	xrandr --output "$MONITOR" --off --output "$TV" --mode 1920x1080 --primary
 fi
 
