@@ -36,16 +36,3 @@ export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
 export EDITOR="/usr/bin/vim"
 
 export XDG_CONFIG_HOME="$HOME/.config"
-
-if xhost >& /dev/null ; then
-	
-	# numlock
-	numlockx on
-
-	# Swap Ctrl and Caps Lock
-	/usr/bin/setxkbmap -option "ctrl:swapcaps"
-
-fi
-
-. "$HOME/.cargo/env"
-
