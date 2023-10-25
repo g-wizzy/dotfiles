@@ -1,10 +1,13 @@
 #!/bin/bash
 
-dir=~/dotfiles
+dir=~/.dotfiles
 mkdir -p ~/.config
 
 # Configure vimrc
 ln -s $dir/vimrc ~/.vimrc
+
+# Configure ranger
+ln -s $dir/ranger ~/.config/ranger
 
 # Configure profile
 ln -s $dir/profile ~/.profile
