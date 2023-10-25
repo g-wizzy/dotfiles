@@ -41,7 +41,7 @@ def handle_window_killed(window):
     if window.floating:
         return
     if window.group.name != "c":  # Exclude chat group
-        if len(window.group.windows) == 2:
+        if len(window.group.windows) <= 1:
             window.group.layout = "max"
         else:
             window.group.layout = "bsp"
