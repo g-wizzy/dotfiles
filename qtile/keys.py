@@ -49,7 +49,7 @@ def float_to_front(qtile):
     for group in qtile.groups:
         for window in group.windows:
             if window.floating:
-                window.cmd_bring_to_front()
+                window.bring_to_front()
 
 def screenshot(to_clip = False, rect_select = False):
     def f(qtile):

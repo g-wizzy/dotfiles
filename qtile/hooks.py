@@ -10,7 +10,7 @@ def autostart():
 @hook.subscribe.client_focus
 def focus_floating(window):
     if window.floating:
-        window.cmd_bring_to_front()
+        window.bring_to_front()
 
 @hook.subscribe.client_new
 def floating_dialogs(window):
