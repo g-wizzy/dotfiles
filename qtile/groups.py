@@ -15,7 +15,7 @@ groups = [
     Group(
         's',
         matches=[Match(wm_class=["vscodium"])],
-        label=u'\uf668',
+        label=u'\ue5fb',
         layout=default_layouts
     ),
     Group(
@@ -44,7 +44,7 @@ groups = [
             "discord",
             "threema"
         ])],
-        label=u'\uf867',
+        label=u'\U000f0365',
         layouts=chat_layouts
     ),
 ]
