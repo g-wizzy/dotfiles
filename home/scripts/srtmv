@@ -1,0 +1,23 @@
+#! /usr/bin/python
+
+from pathlib import Path
+from sys import exit
+
+srt_files = list(Path().glob("*.srt"))
+if len(srt_files) != 1:
+	print(f"Expected one srt file. Found {len(srt_files)}.")
+	exit(-1)
+srt_file = srt_files[0]
+
+movie_extensions = {".mp4", ".avi", ".mkv", ".m4a"}
+movie_files = [
+	f for f in Path().iterdir()
+	if f.is_file() and f.suffix.lower() in movie_extensions
+]
+if len(movie_files) != 1:
+	print(f"Expected one movie file. Found {len(movie_files)}.")
+	exit(-1)
+movie_file = movie_files[0]
+
+srt_file.rename(movie_file.stem + ".srt")
+

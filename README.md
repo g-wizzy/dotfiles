@@ -1,12 +1,11 @@
 # Dotfiles
 
-## Requisites
+To install, simply run
 
-### `zsh`
+```
+stow home -t ~
+```
 
-- Oh my zsh
-- zsh syntax highlighting
+from this directory.
 
-### `fzf`
-
-### `qtile`
+The `vscodium-settings.json` are included just in case, but aren't installed with the above command. It should be moved manually to the `~/.config/VSCodium/User/settings.json`, just so you feel bad doing it.

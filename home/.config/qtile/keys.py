@@ -105,13 +105,15 @@ keys = [
     # Programs shortcuts
     Key("M-<Return>", lazy.spawn("kitty")),
     Key("M-e", lazy.spawn("kitty --title='ranger' zsh -c 'unset LINES; unset COLUMNS; ranger'")),
+    Key("M-S-e", lazy.spawn("nautilus")),
+    Key("M-u", lazy.group["scratchpad"].dropdown_toggle("update")),
 
     Key("M-r", lazy.spawn("rofi -modi drun,ssh -show drun")),
     Key("A-<Tab>", lazy.spawn("rofi -modi windowcd -show windowcd")),
 
     Key("M-f", lazy.spawn("firefox")),
     Key("M-S-f", lazy.spawn("firefox --private-window")),
-    Key("M-v", lazy.spawn("vscodium")),
+    Key("M-v", lazy.spawn("kitty zsh -c 'rofi-nvim'")),
 
     # Screen capture (Shift => selection, Ctrl => to clipboard)
     Key("<F12>", lazy.function(screenshot())),
@@ -157,5 +159,6 @@ mouse = [
          start=lazy.window.get_size()),
     Click("M-2", lazy.window.bring_to_front()),
     Click("M-S-1", lazy.window.toggle_floating()),
+    Click("9", lazy.layout.shuffle_left()),
 ]
 

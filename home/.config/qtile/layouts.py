@@ -34,7 +34,7 @@ col = layout.Columns(**layout_defaults)
 default_layouts = [max, bsp]
 chat_layouts = [max, col]
 
-layouts = list(set(default_layouts + chat_layouts))
+layouts = [max, bsp, col]
 
 
 floating_layout_defaults = layout_defaults.copy()

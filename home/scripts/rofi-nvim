@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+cd ~/Projects
+PROJECT=$(ls -t . | rofi -dmenu -i -p "Project")
+cd $PROJECT
+nvim .

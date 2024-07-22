@@ -1,6 +1,8 @@
 from libqtile.config import Group, Match, EzKey as Key, ScratchPad, DropDown
 from libqtile.lazy import lazy
 
+import re
+
 from keys import keys
 from layouts import default_layouts, chat_layouts
 
@@ -8,43 +10,37 @@ from layouts import default_layouts, chat_layouts
 groups = [
     Group(
         'a',
-        matches=[Match(wm_class=["firefox"])],
+        matches=[Match(wm_class=re.compile(r"^(firefox)$"))],
         label=u'\uf269',
-        layout=default_layouts
+        layouts=default_layouts
     ),
     Group(
         's',
-        matches=[Match(wm_class=["vscodium"])],
+        matches=[Match(wm_class=re.compile(r"^(vscodium)$"))],
         label=u'\ue5fb',
-        layout=default_layouts
+        layouts=default_layouts
     ),
     Group(
         'd',
         label=u'\uf120',
-        layout=default_layouts
+        layouts=default_layouts
     ),
     Group(
         'y',
         label=u'\uf120',
-        layout=default_layouts
+        layouts=default_layouts
     ),
     Group(
         'x',
-        matches=[Match(wm_class=[
-            "microsoft teams - preview",
-            "prospect mail"
-        ])],
+        matches=[Match(wm_class=re.compile(r"^(microsoft\ teams\ \-\ preview|prospect\ mail)$"))],
         label=u'\U000f02bb',
-        layout=default_layouts
+        layouts=default_layouts
     ),
     Group(
         'c',
-        matches=[Match(wm_class=[
-            "telegram-desktop",
-            "discord",
-            "threema"
-        ])],
+        matches=[Match(wm_class=re.compile(r"^(telegram\-desktop|discord|threema)$"))],
         label=u'\U000f0365',
+        layout="columns",
         layouts=chat_layouts
     ),
 ]
@@ -64,6 +60,7 @@ dropdown_defaults = {
     "y": 0.65,
     "opacity": 0.9,
     "width": 1.002,
+    "on_focus_lost_hide": False,
 }
 
 groups.append(
@@ -77,6 +74,11 @@ groups.append(
             DropDown(
                 "python", 
                 "/usr/bin/kitty python",
+                **dropdown_defaults
+            ),
+            DropDown(
+                "update", 
+                "/usr/bin/kitty yay -Syu",
                 **dropdown_defaults
             ),
         ]

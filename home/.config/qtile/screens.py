@@ -1,5 +1,6 @@
 from libqtile.config import Screen
 from libqtile import widget, bar
+from libqtile.lazy import lazy
 
 from custom_battery_widget import CustomBattery
 from color_themes import gruvbox_theme as theme
@@ -12,38 +13,31 @@ from random import choice
 
 
 color_schemes = [
-    dict(
-        background = theme.bg0,
-        arrow_color = theme.bg1,
-        foreground = theme.txt2
-    ),
-    dict(
-        background = theme.bg1,
-        arrow_color = theme.bg0,
-        foreground = theme.txt2
-    )
+    dict(background=theme.bg0, arrow_color=theme.bg1, foreground=theme.txt2),
+    dict(background=theme.bg1, arrow_color=theme.bg0, foreground=theme.txt2),
 ]
 
 # Separator-related functions and variables
 
-def separator(right_looking = True):
+
+def separator(right_looking=True):
     global color_scheme
     if right_looking:
         separator.current_scheme = 1 - separator.current_scheme
         color_scheme = color_schemes[separator.current_scheme]
 
         return widget.TextBox(
-            u'\ue0b0', 
+            "\ue0b0",
             **separator_defaults,
-            background = color_scheme["background"],
-            foreground = color_scheme["arrow_color"]
+            background=color_scheme["background"],
+            foreground=color_scheme["arrow_color"],
         )
     else:
         ret = widget.TextBox(
-            u'\ue0b2', 
+            "\ue0b2",
             **separator_defaults,
-            background = color_scheme["background"],
-            foreground = color_scheme["arrow_color"]
+            background=color_scheme["background"],
+            foreground=color_scheme["arrow_color"],
         )
 
         separator.current_scheme = 1 - separator.current_scheme
@@ -53,14 +47,14 @@ def separator(right_looking = True):
 
 
 separator_defaults = dict(
-    font='Victor Mono',
+    font="Victor Mono",
     fontsize=24,
     padding=0,
 )
 
 
 widget_defaults = dict(
-    font='Victor Mono Semibold',
+    font="Victor Mono Semibold",
     fontsize=12,
     padding=6,
 )
@@ -75,21 +69,21 @@ group_box_widget_defaults = icon_defaults | dict(
     active=theme.txt0,
     inactive=theme.bg2,
     # Current screen colors
-    highlight_method='line',
+    highlight_method="line",
     highlight_color=theme.bg4,
     this_current_screen_border=theme.alert3,
     this_screen_border=theme.bg3,
     # Urgent colors
     urgent_alert_method="block",
-    urgent_border=theme.alert0
+    urgent_border=theme.alert0,
 )
 
 battery_text_widget_defaults = dict(
-    format='{percent:2.0%}',
+    format="{percent:2.0%}",
     low_percentage=0.2,
     low_foreground=theme.alert0,
     update_interval=5,
-    show_short_text=False
+    show_short_text=False,
 )
 
 # Determines the color scheme on the leftmost widget
@@ -102,72 +96,51 @@ bar_widgets = [
         **color_scheme,
         scale=0.8,
     ),
-
     separator(),
-
-    widget.GroupBox(
-        **color_scheme,
-        **group_box_widget_defaults
-    ),
-
+    widget.GroupBox(**color_scheme, **group_box_widget_defaults),
     separator(),
-
     widget.Spacer(
-        length = 16,
+        length=16,
         **color_scheme,
     ),
-
-    widget.WindowName(
-        **widget_defaults,
-        **color_scheme,
-        format='{name}'
-    ),
-
+    widget.WindowName(**widget_defaults, **color_scheme, format="{name}"),
     widget.CheckUpdates(
         **widget_defaults,
         **color_scheme,
-        distro="Arch",
+        distro="Arch_checkupdates",
+        execute="kitty yay -Syu",
         colour_no_updates=color_scheme["foreground"],
         colour_have_updates=theme.alert1,
     ),
-
-    separator(right_looking = False),
-
+    separator(right_looking=False),
     widget.Clock(
         **widget_defaults,
         **color_scheme,
-        format='%H:%M:%S %a %d.%m.%Y',
+        format="%H:%M:%S %a %d.%m.%Y",
     ),
-
-    separator(right_looking = False),
-
+    separator(right_looking=False),
     widget.Systray(
         icon_size=24,
         **widget_defaults,
         **color_scheme,
     ),
-
     widget.Spacer(
-        length = 16,
+        length=16,
         **color_scheme,
     ),
-
-    separator(right_looking = False),
-
+    separator(right_looking=False),
     # Volume icon and widget
-    widget.TextBox(
-        u'\U000f057e',
-        **icon_defaults,
-        **color_scheme,
-    ),
-    widget.Volume(
-        **widget_defaults,
-        **color_scheme,
-        device = "default",
-    ),
-
-    separator(right_looking = False),
-    
+    # widget.TextBox(
+    #     u'\U000f057e',
+    #     **icon_defaults,
+    #     **color_scheme,
+    # ),
+    # widget.Volume(
+    #     **widget_defaults,
+    #     **color_scheme,
+    #     device = "default",
+    # ),
+    # separator(right_looking = False),
     # Brightness icon and widget
     # widget.TextBox(
     #     u'\uf5dd',
@@ -180,9 +153,7 @@ bar_widgets = [
     #     backlight_name='intel_backlight',
     #     format='{percent:2.0%}'
     # ),
-
     # separator(right_looking = False),
-    
     # CustomBattery(
     #     **icon_defaults,
     #     **battery_text_widget_defaults,
@@ -195,9 +166,7 @@ bar_widgets = [
     #     **color_scheme,
     #     battery=0
     # ),
-
     # separator(right_looking = False),
-
     # CustomBattery(
     #     **icon_defaults,
     #     **battery_text_widget_defaults,
@@ -210,9 +179,7 @@ bar_widgets = [
     #     **color_scheme,
     #     battery=1
     # ),
-
     # separator(right_looking = False),
-    
     widget.CPUGraph(
         **widget_defaults,
         **color_scheme,
@@ -221,71 +188,51 @@ bar_widgets = [
         border_width=0,
         line_width=0,
         fill_color=theme.highlight2,
-        margin_x=12
+        margin_x=12,
     ),
 ]
 
 # Second screen bar
 second_bar_widgets = [
-
     widget.CurrentLayoutIcon(
         **widget_defaults,
         **color_scheme,
         scale=0.8,
     ),
-
     separator(),
-
-    widget.GroupBox(
-        **color_scheme,
-        **group_box_widget_defaults
-    ),
-
+    widget.GroupBox(**color_scheme, **group_box_widget_defaults),
     separator(),
-
     widget.Spacer(
-        length = 16,
+        length=16,
         **color_scheme,
     ),
-
-    widget.WindowName(
-        **widget_defaults,
-        **color_scheme,
-        format='{name}'
-    ),
-
+    widget.WindowName(**widget_defaults, **color_scheme, format="{name}"),
     widget.CheckUpdates(
         **widget_defaults,
         **color_scheme,
-        distro="Arch",
+        distro="Arch_checkupdates",
         colour_no_updates=color_scheme["foreground"],
         colour_have_updates=theme.alert1,
     ),
-
-    separator(right_looking = False),
-
+    separator(right_looking=False),
     widget.Clock(
         **widget_defaults,
         **color_scheme,
-        format='%H:%M:%S %a %d.%m.%Y',
+        format="%H:%M:%S %a %d.%m.%Y",
     ),
-
-    separator(right_looking = False),
-
+    separator(right_looking=False),
     # Volume icon and widget
     widget.TextBox(
-        u'\ufa7d',
+        "\ufa7d",
         **icon_defaults,
         **color_scheme,
     ),
     widget.Volume(
         **widget_defaults,
         **color_scheme,
-        device = "default",
+        device="default",
     ),
-
-    separator(right_looking = False),
-    
+    separator(right_looking=False),
     # Brightness icon and widget
     # widget.TextBox(
     #     u'\uf5dd',
@@ -298,9 +245,7 @@ second_bar_widgets = [
     #     backlight_name='intel_backlight',
     #     format='{percent:2.0%}'
     # ),
-
     # separator(right_looking = False),
-    
     # CustomBattery(
     #     **icon_defaults,
     #     **battery_text_widget_defaults,
@@ -313,9 +258,7 @@ second_bar_widgets = [
     #     **color_scheme,
     #     battery=0
     # ),
-
     # separator(right_looking = False),
-
     # CustomBattery(
     #     **icon_defaults,
     #     **battery_text_widget_defaults,
@@ -328,9 +271,7 @@ second_bar_widgets = [
     #     **color_scheme,
     #     battery=1
     # ),
-
     # separator(right_looking = False),
-    
     widget.CPUGraph(
         **widget_defaults,
         **color_scheme,
@@ -339,11 +280,11 @@ second_bar_widgets = [
         border_width=0,
         line_width=0,
         fill_color=theme.highlight2,
-        margin_x=12
+        margin_x=12,
     ),
 ]
 
-wallpaper_folder = Path(expanduser('~/Pictures/Wallpapers/'))
+wallpaper_folder = Path(expanduser("~/Pictures/Wallpapers/"))
 wallpaper = choice(list(wallpaper_folder.iterdir()))
 
 screens = [
@@ -353,7 +294,7 @@ screens = [
             24,
         ),
         wallpaper=wallpaper.absolute(),
-        wallpaper_mode="fill"
+        wallpaper_mode="fill",
     ),
     # Screen(
     #     top=bar.Bar(
@@ -366,4 +307,3 @@ screens = [
 ]
 
 reconfigure_screens = True
-
