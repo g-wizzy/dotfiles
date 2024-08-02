@@ -60,7 +60,7 @@ dropdown_defaults = {
     "y": 0.65,
     "opacity": 0.9,
     "width": 1.002,
-    "on_focus_lost_hide": False,
+    "on_focus_lost_hide": True,
 }
 
 groups.append(
