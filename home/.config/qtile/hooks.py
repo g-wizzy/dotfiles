@@ -28,24 +28,3 @@ def floating_dialogs(window):
 def floating_steam(window):
     if window.name.startswith("Steam "):
         window.floating = True
-
-
-# All groups default to Max Layout, but auto switch to BSP when a second window is added
-@hook.subscribe.group_window_add
-def handle_layout(group, window):
-    if window.floating:
-        return
-    if len(group.windows) == 0:
-        group.layout = "max"
-    else:
-        group.layout = "columns" if group.name == "c" else "bsp"
-
-
-@hook.subscribe.client_killed
-def handle_window_killed(window):
-    if window.floating:
-        return
-    if len(window.group.windows) <= 1:
-        window.group.layout = "max"
-    else:
-        window.group.layout = "columns" if window.group.name == "c" else "bsp"

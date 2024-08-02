@@ -28,10 +28,10 @@ col = layout.Columns(**layout_defaults)
 # layout.TreeTab()
 # layout.Zoomy()
 
-default_layouts = [max, bsp]
-chat_layouts = [max, col]
+default_layouts = [bsp, max]
+chat_layouts = [col, max]
 
-layouts = [max, bsp, col]
+layouts = [bsp, col, max]
 
 
 floating_layout_defaults = layout_defaults.copy()

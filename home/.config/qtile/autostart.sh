@@ -4,7 +4,7 @@
 xrandr --output HDMI-0 --off
 
 # Picom for transparency
-# picom &
+picom -b
 
 # xscreensaver (so that it can be called with xscreensaver-command -l)
 xscreensaver --no-splash &
