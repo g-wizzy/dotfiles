@@ -35,7 +35,7 @@ layouts = [bsp, col, max]
 
 
 floating_layout_defaults = layout_defaults.copy()
-floating_layout_defaults.update(border_width=3)
+# floating_layout_defaults.update(border_width=3)
 
 floating_layout = layout.Floating(
     float_rules=[
