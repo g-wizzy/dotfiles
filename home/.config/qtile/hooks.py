@@ -1,12 +1,13 @@
 from libqtile import hook, qtile
 
-import subprocess, os
+import subprocess
+from pathlib import Path
 
 
 @hook.subscribe.startup_once
 def autostart():
-    path = os.path.expanduser("~/.config/qtile/autostart.sh")
-    subprocess.call([path])
+    path = Path("~/.config/qtile/autostart.sh").expanduser()
+    subprocess.call([str(path)])
 
 
 @hook.subscribe.client_focus
@@ -25,6 +26,6 @@ def floating_dialogs(window):
 
 # Steam dialog windows aren't detected as such
 @hook.subscribe.client_new
-def floating_steam(window):
+def handle_steam_dialogs(window):
     if window.name.startswith("Steam "):
         window.floating = True
