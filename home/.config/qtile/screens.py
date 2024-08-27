@@ -55,6 +55,9 @@ icon_defaults["fontsize"] = 24
 
 group_box_widget_defaults = icon_defaults | dict(
     fontsize=20,
+    padding=12,
+    margin_x=-4,
+    spacing=0,
     center_aligned=True,
     # Text colors
     active=theme.txt0,
@@ -79,22 +82,36 @@ battery_text_widget_defaults = dict(
 
 
 bar_widgets = [
-    widget.GroupBox(background=separators.background, **group_box_widget_defaults),
+    widget.GroupBox(
+        background=separators.background,
+        visible_groups=["a", "s", "d"],
+        **group_box_widget_defaults,
+    ),
+    separators.next(right_looking=True),
+    widget.Spacer(length=16, background=separators.background),
+    separators.next(right_looking=False),
+    widget.GroupBox(
+        background=separators.background,
+        visible_groups=["y", "x", "c"],
+        **group_box_widget_defaults,
+    ),
     separators.next(right_looking=True),
     widget.Spacer(
-        length=16,
+        # length=16,
         background=separators.background,
     ),
-    widget.WindowName(
-        **widget_defaults, background=separators.background, format="{name}"
-    ),
+    # widget.WindowName(
+    #     **widget_defaults, background=separators.background, format="{name}"
+    # ),
     widget.CheckUpdates(
-        **widget_defaults,
+        **icon_defaults,
         background=separators.background,
+        display_format="\U000f06c3",
         distro="Arch_checkupdates",
         execute="kitty yay -Syu",
         colour_have_updates=theme.alert1,
     ),
+    widget.Spacer(length=16, background=separators.background),
     separators.next(right_looking=False),
     widget.Clock(
         **widget_defaults,
@@ -173,110 +190,26 @@ bar_widgets = [
         fill_color=theme.highlight2,
         margin_x=12,
     ),
-]
-
-# Second screen bar
-second_bar_widgets = [
-    widget.CurrentLayoutIcon(
-        **widget_defaults,
-        background=separators.background,
-        scale=0.8,
-    ),
-    separators.next(right_looking=True),
-    widget.GroupBox(background=separators.background, **group_box_widget_defaults),
-    separators.next(right_looking=True),
-    widget.Spacer(
-        length=16,
-        background=separators.background,
-    ),
-    widget.WindowName(
-        **widget_defaults, background=separators.background, format="{name}"
-    ),
-    widget.CheckUpdates(
-        **widget_defaults,
-        background=separators.background,
-        distro="Arch_checkupdates",
-        colour_have_updates=theme.alert1,
-    ),
     separators.next(right_looking=False),
-    widget.Clock(
-        **widget_defaults,
-        background=separators.background,
-        format="%H:%M:%S %a %d.%m.%Y",
-    ),
-    separators.next(right_looking=False),
-    # Volume icon and widget
-    widget.TextBox(
-        "\ufa7d",
-        **icon_defaults,
-        background=separators.background,
-    ),
-    widget.Volume(
-        **widget_defaults,
-        background=separators.background,
-        device="default",
-    ),
-    separators.next(right_looking=False),
-    # Brightness icon and widget
-    # widget.TextBox(
-    #     u'\uf5dd',
-    #     **icon_defaults,
-    #     background=separators.background,
-    # ),
-    # widget.Backlight(
-    #     **widget_defaults,
-    #     background=separators.background,
-    #     backlight_name='intel_backlight',
-    #     format='{percent:2.0%}'
-    # ),
-    # separator(right_looking = False),
-    # CustomBattery(
-    #     **icon_defaults,
-    #     **battery_text_widget_defaults,
-    #     background=separators.background,
-    #     battery=0
-    # ),
-    # widget.Battery(
-    #     **widget_defaults,
-    #     **battery_text_widget_defaults,
-    #     background=separators.background,
-    #     battery=0
-    # ),
-    # separator(right_looking = False),
-    # CustomBattery(
-    #     **icon_defaults,
-    #     **battery_text_widget_defaults,
-    #     background=separators.background,
-    #     battery=1
-    # ),
-    # widget.Battery(
-    #     **widget_defaults,
-    #     **battery_text_widget_defaults,
-    #     background=separators.background,
-    #     battery=1
-    # ),
-    # separator(right_looking = False),
-    widget.CPUGraph(
+    widget.MemoryGraph(
         **widget_defaults,
         background=separators.background,
         frequency=0.5,
         samples=50,
         border_width=0,
         line_width=0,
-        fill_color=theme.highlight2,
+        fill_color=theme.highlight3,
         margin_x=12,
     ),
 ]
+
 
 wallpaper_folder = Path(expanduser("~/Pictures/Wallpapers/"))
 wallpaper = choice(list(wallpaper_folder.iterdir()))
 
 screens = [
     Screen(
-        top=bar.Bar(
-            bar_widgets,
-            24,
-        ),
+        top=bar.Bar(bar_widgets, 36, margin=12),
         wallpaper=str(wallpaper.absolute()),
         wallpaper_mode="fill",
     ),
