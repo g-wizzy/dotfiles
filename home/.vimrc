@@ -69,3 +69,8 @@ inoremap <A-k> <Esc>:m-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+set textwidth=80
+set colorcolumn=81
+
+colorscheme gruvbox
+set background=dark

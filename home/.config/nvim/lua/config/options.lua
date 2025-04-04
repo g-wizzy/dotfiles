@@ -14,3 +14,5 @@ vim.filetype.add({
 		frag = "glsl",
 	},
 })
+vim.opt.wrap = true
+vim.opt.colorcolumn = "81"
