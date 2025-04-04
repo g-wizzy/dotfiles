@@ -2,7 +2,7 @@
 
 To install, simply run
 
-```
+```sh
 stow home -t ~
 ```
 

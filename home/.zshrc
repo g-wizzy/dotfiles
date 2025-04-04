@@ -64,3 +64,7 @@ alias lg="lazygit"
 alias sv="source venv/bin/activate"
 
 alias -s pdf=firefox
+
+source ~/.profile
+
+neofetch
