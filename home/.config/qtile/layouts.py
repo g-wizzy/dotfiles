@@ -6,7 +6,7 @@ from color_themes import gruvbox_theme as theme
 
 layout_defaults = dict(
     margin=18,
-    border_width=0,
+    border_width=3,
     border_normal=theme.bg0,
     border_focus=theme.highlight0,
     grow_amount=1,
