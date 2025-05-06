@@ -22,10 +22,3 @@ def floating_dialogs(window):
     transient = window.window.get_wm_transient_for()
     if dialog or transient:
         window.floating = True
-
-
-# Steam dialog windows aren't detected as such
-@hook.subscribe.client_new
-def handle_steam_dialogs(window):
-    if window.name.startswith("Steam "):
-        window.floating = True

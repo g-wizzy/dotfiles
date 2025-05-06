@@ -8,43 +8,59 @@ from layouts import default_layouts, chat_layouts
 
 
 groups = [
-    Group(
-        "a",
-        matches=[Match(wm_class=re.compile(r"^(firefox)$"))],
-        label="\uf269",
-        layouts=default_layouts,
-    ),
-    Group(
-        "s",
-        matches=[Match(wm_class=re.compile(r"^(vscodium|nvim)$"))],
-        label="\U000f02a2",
-        layouts=default_layouts,
-    ),
-    Group("d", label="\uf120", layouts=default_layouts),
-    Group("y", label="\uf120", layouts=default_layouts),
-    Group(
-        "x",
-        matches=[Match(wm_class=re.compile(r"^(steam|slippi launcher)$"))],
-        label="\uf1b6",
-        layouts=default_layouts,
-    ),
-    Group(
-        "c",
-        matches=[Match(wm_class=re.compile(r"^(telegram\-desktop|discord|threema)$"))],
-        label="\U000f0365",
-        layout="columns",
-        layouts=chat_layouts,
-    ),
+    Group("A", layouts=default_layouts, screen_affinity=2),
+    Group("S", layouts=default_layouts, screen_affinity=2),
+    Group("D", layouts=default_layouts, screen_affinity=2),
+    Group("Y", layouts=default_layouts, screen_affinity=1),
+    Group("X", layouts=default_layouts, screen_affinity=1),
+    Group("C", layouts=default_layouts, screen_affinity=1),
+    Group("Z", layouts=default_layouts, screen_affinity=0),
 ]
+
+
+def go_to_screen(name: str):
+    def _inner(qtile):
+        if len(qtile.screens) == 1:
+            qtile.groups_map[name].toscreen()
+            return
+
+        if name in "ASD":
+            qtile.focus_screen(2)
+        elif name in "YXC":
+            qtile.focus_screen(1)
+        else:
+            qtile.focus_screen(0)
+        qtile.groups_map[name].toscreen()
+
+    return _inner
+
+
+def go_to_screen_and_move_window(name: str):
+    def _inner(qtile):
+        if len(qtile.screens) == 1:
+            qtile.current_window.togroup(name, switch_group=True)
+            return
+
+        qtile.current_window.togroup(name, switch_group=False)
+        if name in "ASD":
+            qtile.focus_screen(2)
+        elif name in "YXC":
+            qtile.focus_screen(1)
+        else:
+            qtile.focus_screen(0)
+        qtile.groups_map[name].toscreen()
+
+    return _inner
 
 
 for i in groups:
     keys.extend(
         [
-            # mod1 + letter of group = switch to group
-            Key(f"M-{i.name}", lazy.group[i.name].toscreen()),
-            # mod1 + shift + letter of group = switch to & move focused window to group
-            Key(f"M-S-{i.name}", lazy.window.togroup(i.name, switch_group=True)),
+            Key(f"M-{i.name.lower()}", lazy.function(go_to_screen(i.name))),
+            Key(
+                f"M-S-{i.name.lower()}",
+                lazy.function(go_to_screen_and_move_window(i.name)),
+            ),
         ]
     )
 
