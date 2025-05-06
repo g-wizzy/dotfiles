@@ -9,10 +9,16 @@ vim.g.lazyvim_python_lsp = "pyright"
 -- vim.g.lazyvim_python_ruff = "ruff"
 
 vim.filetype.add({
-	extension = {
-		vert = "glsl",
-		frag = "glsl",
-	},
+  extension = {
+    vert = "glsl",
+    frag = "glsl",
+  },
 })
 vim.opt.wrap = true
 vim.opt.colorcolumn = "81"
+
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.statuscolumn = ""
+
+vim.o.title = true

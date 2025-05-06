@@ -13,12 +13,12 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  group = vim.api.nvim_create_augroup("filetype_glsl", { clear = true }),
+  group = vim.api.nvim_create_augroup("auto_wrap", { clear = true }),
   desc = "Auto toggle line wrap",
   callback = function()
     if vim.fn.expand("%:e") == "tex" or vim.fn.expand("%:e") == "md" then
       vim.bo.textwidth = 80
-      vim.bo.wrap = true
+      vim.opt.wrap = true
     end
   end,
 })
