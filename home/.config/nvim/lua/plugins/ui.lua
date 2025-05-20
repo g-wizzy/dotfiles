@@ -78,6 +78,16 @@ return {
           { section = "startup" },
         },
       },
+      statuscolumn = {
+        enabled = true,
+        left = { "mark", "sign" },
+        right = { "fold", "git" },
+        folds = {
+          open = true,
+          git_hl = false,
+        },
+        refresh = 50,
+      },
     },
   },
 }

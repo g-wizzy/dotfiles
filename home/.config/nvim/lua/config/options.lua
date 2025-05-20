@@ -31,7 +31,13 @@ o.mouse = "a"
 o.number = true
 o.relativenumber = true
 o.numberwidth = 4
+opt.statuscolumn = "%s%r %l "
 o.ruler = true
+
+-- Folds
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldenable = false
 
 -- Line length
 opt.wrap = true
