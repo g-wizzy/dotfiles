@@ -122,7 +122,7 @@ keys = [
         ),
     ),
     Key("M-S-e", lazy.spawn("nautilus")),
-    Key("M-u", lazy.spawn("kitty zsh -c 'qtile-update'")),
+    Key("M-u", lazy.spawn("kitty zsh -c 'yay -Syu && qtile cmd-obj -o widget checkupdates -f force_update'")),
     Key("M-r", lazy.spawn("rofi -show drun")),
     Key("A-<Tab>", lazy.spawn("rofi -modi windowcd -show windowcd")),
     Key("M-f", lazy.spawn("firefox")),
