@@ -88,6 +88,16 @@ return {
         },
         refresh = 50,
       },
+      picker = {
+        sources = {
+          explorer = {
+            hidden = true,
+          },
+          files = {
+            hidden = true,
+          },
+        },
+      },
     },
   },
 }
