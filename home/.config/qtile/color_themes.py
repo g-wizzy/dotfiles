@@ -40,3 +40,23 @@ gruvbox_theme = ColorTheme(
     alert3="fabd2f",  # yellow
     alert4="d3869b",  # purple
 )
+
+gruvbox_theme_light = ColorTheme(
+    bg0="fbf1c7",
+    bg1="ebdbb2",
+    bg2="d5c4a1",
+    bg3="bdae93",
+    bg4="a89984",
+    txt0="282828",
+    txt1="3c3836",
+    txt2="504945",
+    highlight0="689d6a",  # aqua
+    highlight1="458588",  # blue
+    highlight2="d79921",  # yellow
+    highlight3="98971a",  # green
+    alert0="cc241d",  # red
+    alert1="b16286",  # purple
+    alert2="fe8019",  # orange
+    alert3="fabd2f",  # yellow
+    alert4="d3869b",  # purple
+)
