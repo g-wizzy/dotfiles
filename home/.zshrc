@@ -59,9 +59,11 @@ eval "$(fzf --zsh)"
 alias ls="ls --color"
 alias l="exa -la --git --group-directories-first"
 alias py="python"
+alias rb="ruby"
 alias cp="rsync -r --progress"
 alias lg="lazygit"
 alias sv="source venv/bin/activate"
+alias bat="batcat"
 
 alias -s pdf=firefox
 

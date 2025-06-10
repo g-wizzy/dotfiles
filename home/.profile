@@ -37,5 +37,10 @@ export EDITOR="/usr/bin/nvim"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-export  MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
-export BAT_THEME=gruvbox-light
+export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" |
+batcat -p -lman'"
+
+if [[ "$DISPLAY" ]]; then
+  export BAT_THEME=gruvbox-light
+fi
+
