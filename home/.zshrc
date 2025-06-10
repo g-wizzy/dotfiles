@@ -65,6 +65,16 @@ alias sv="source venv/bin/activate"
 
 alias -s pdf=firefox
 
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+  --color=fg:#665c54,fg+:#282828,bg:-1,bg+:#ebdbb2
+  --color=hl:#98971a,hl+:#79740e,info:#7c6f64,marker:#98971a
+  --color=prompt:#79740e,spinner:#d65d0e,pointer:#9d0006,header:#076678
+  --color=border:#282828,label:#ff0000,query:#504945
+  --border="rounded" --border-label="" --preview-window="border-rounded" --prompt="❯ "
+  --marker="*" --pointer="❯" --separator="─ " --scrollbar="│"
+  --layout="reverse"'
+export FZF_CTRL_T_OPTS="--preview 'bat -n --color=always {}'"
+
 source ~/.profile
 
 neofetch

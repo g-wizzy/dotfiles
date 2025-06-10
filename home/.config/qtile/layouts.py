@@ -1,14 +1,14 @@
 from libqtile import layout
 from libqtile.config import Match
 
-from color_themes import gruvbox_theme as theme
+from color_themes import gruvbox_theme_light as theme
 
 
 layout_defaults = dict(
     margin=18,
     border_width=3,
     border_normal=theme.bg0,
-    border_focus=theme.highlight0,
+    border_focus=theme.highlight2,
     grow_amount=1,
 )
 

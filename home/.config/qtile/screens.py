@@ -1,7 +1,7 @@
 from libqtile.config import Screen
 from libqtile import qtile, widget, bar, hook
 
-from color_themes import gruvbox_theme as theme
+from color_themes import gruvbox_theme_light as theme
 
 from itertools import cycle
 

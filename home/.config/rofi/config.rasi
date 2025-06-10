@@ -150,3 +150,4 @@ configuration {
 /*	me-accept-custom: "Control+MouseDPrimary";*/
 }
 @import "gruvbox-dark-custom"
+@theme "/usr/share/rofi/themes/gruvbox-light.rasi"

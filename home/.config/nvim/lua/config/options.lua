@@ -9,6 +9,8 @@ local g = vim.g
 -------------------------------------- options ------------------------------------------
 o.title = true
 
+o.background = "light"
+
 o.showmode = false
 o.laststatus = 3
 
