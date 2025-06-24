@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-cd ~/Projects
-PROJECT=$(ls -ct . | rofi -dmenu -i -p "Project")
-cd $PROJECT
-nvim .

@@ -1,8 +1,9 @@
 from libqtile.config import Screen
-from libqtile import qtile, widget, bar, hook
+from libqtile import widget, bar
 
 from color_themes import gruvbox_theme_light as theme
 
+import subprocess
 from itertools import cycle
 
 from pathlib import Path
@@ -13,8 +14,8 @@ from random import choice
 # Separator-related functions and variables
 class SeparatorWriter:
     def __init__(self, colors: tuple[str, str]):
-        self.colors = cycle(colors)
-        self.background = next(self.colors)
+        self._colors = colors
+        self.reset()
 
     def next(self, right_looking: bool = True):
         left_color, right_color = self.background, next(self.colors)
@@ -32,6 +33,10 @@ class SeparatorWriter:
             background=background,
             foreground=foreground,
         )
+
+    def reset(self):
+        self.colors = cycle(self._colors)
+        self.background = next(self.colors)
 
 
 separators = SeparatorWriter((theme.bg0, theme.bg1))
@@ -55,6 +60,7 @@ icon_defaults = widget_defaults.copy()
 icon_defaults["fontsize"] = 24
 
 group_box_widget_defaults = icon_defaults | dict(
+    background=separators.background,
     fontsize=20,
     padding=12,
     margin_x=-4,
@@ -81,173 +87,279 @@ battery_text_widget_defaults = dict(
     show_short_text=False,
 )
 
-main_screen_groupbox = widget.GroupBox(
-    visible_groups=["Z"],
+# Widget instanciation
+separators.next()
+
+updates = widget.CheckUpdates(
+    **icon_defaults,
     background=separators.background,
-    **group_box_widget_defaults,
+    display_format="\U000f06c3",
+    distro="Debian",
+    execute="sudo apt upgrade",
+    colour_have_updates=theme.alert1
+)
+
+systray = widget.Systray(
+    icon_size=24,
+    **widget_defaults,
+    background=separators.background,
 )
 
 
-@hook.subscribe.startup
-async def _():
-    if len(qtile.screens) == 1:
-        main_screen_groupbox.visible_groups = ["A", "S", "D", "Y", "X", "C", "Z"]
-    else:
-        main_screen_groupbox.visible_groups = ["Z"]
+def build_widgets(
+    group_boxes: list,
+    clock_format: str,
+    show_systray: bool,
+    laptop_info: bool,
+    monitor_info: bool
+):
+    separators.reset()
 
-    if hasattr(main_screen_groupbox, "bar"):
-        main_screen_groupbox.bar.draw()
-
-
-bar_widgets = [
-    widget.Spacer(length=18, background=separators.background),
-    main_screen_groupbox,
-    separators.next(right_looking=True),
-    widget.Spacer(
-        # length=16,
-        background=separators.background,
-    ),
-    # widget.WindowName(
-    #     **widget_defaults, background=separators.background, format="{name}"
-    # ),
-    widget.CheckUpdates(
-        **icon_defaults,
-        background=separators.background,
-        display_format="\U000f06c3",
-        distro="Arch_checkupdates",
-        execute="kitty yay -Syu",
-        colour_have_updates=theme.alert1,
-    ),
-    widget.Spacer(length=16, background=separators.background),
-    separators.next(right_looking=False),
-    widget.Clock(
-        **widget_defaults,
-        background=separators.background,
-        format="%H:%M:%S %a %d.%m.%Y",
-    ),
-    separators.next(right_looking=False),
-    widget.Systray(
-        icon_size=24,
-        **widget_defaults,
-        background=separators.background,
-    ),
-    widget.Spacer(
-        length=16,
-        background=separators.background,
-    ),
-    separators.next(right_looking=False),
-    widget.TextBox(
-        "\U000f057e",
-        **icon_defaults,
-        background=separators.background,
-    ),
-    widget.Volume(
-        **widget_defaults,
-        background=separators.background,
-        card=0,
-    ),
-    separators.next(right_looking=False),
-    widget.TextBox(
-        "\U000f00de",
-        **icon_defaults,
-        background=separators.background,
-    ),
-    widget.Backlight(
-        **widget_defaults,
-        background=separators.background,
-        backlight_name="intel_backlight",
-        format="{percent:2.0%}",
-    ),
-    separators.next(right_looking=False),
-    widget.TextBox(
-        "\U000f12a3",
-        **icon_defaults,
-        background=separators.background,
-    ),
-    widget.Battery(
-        **widget_defaults,
-        **battery_text_widget_defaults,
-        background=separators.background,
-        battery=0,
-    ),
-    separators.next(right_looking=False),
-    widget.CPUGraph(
-        **widget_defaults,
-        background=separators.background,
-        frequency=0.5,
-        samples=50,
-        border_width=0,
-        line_width=0,
-        fill_color=theme.highlight3,
-        margin_x=12,
-    ),
-]
-
-
-def external_screen_widgets(visible_groups: str):
-    return [
+    widgets = [
         widget.Spacer(length=18, background=separators.background),
-        widget.GroupBox(
-            visible_groups=list(visible_groups),
-            background=separators.background,
-            **group_box_widget_defaults,
-        ),
+        *group_boxes,
         separators.next(right_looking=True),
         widget.Spacer(
             length=16,
             background=separators.background,
         ),
         widget.WindowName(
-            **widget_defaults, background=separators.background, format="{name}"
-        ),
-        widget.CheckUpdates(
-            **icon_defaults,
+            **widget_defaults,
             background=separators.background,
-            display_format="\U000f06c3",
-            distro="Arch_checkupdates",
-            execute="kitty yay -Syu",
-            colour_have_updates=theme.alert1,
+            format="{name}"
         ),
+        updates,
         widget.Spacer(length=16, background=separators.background),
         separators.next(right_looking=False),
         widget.Clock(
             **widget_defaults,
             background=separators.background,
-            format="%H:%M:%S",
+            format=clock_format,
         ),
-        widget.Spacer(length=18, background=separators.background),
     ]
+
+    if show_systray:
+        widgets += [
+            separators.next(right_looking=False),
+            systray,
+            widget.Spacer(
+                length=16,
+                background=separators.background,
+            ),
+        ]
+
+    if laptop_info:
+        widgets += [
+            separators.next(right_looking=False),
+            widget.TextBox(
+                "\U000f057e",
+                **icon_defaults,
+                background=separators.background,
+            ),
+            widget.Volume(
+                **widget_defaults,
+                background=separators.background,
+                card=0,
+            ),
+            separators.next(right_looking=False),
+            widget.TextBox(
+                "\U000f00de",
+                **icon_defaults,
+                background=separators.background,
+            ),
+            widget.Backlight(
+                **widget_defaults,
+                background=separators.background,
+                backlight_name="nvidia_0",
+                format="{percent:2.0%}",
+            ),
+            separators.next(right_looking=False),
+            widget.TextBox(
+                "\U000f12a3",
+                **icon_defaults,
+                background=separators.background,
+            ),
+            widget.Battery(
+                **widget_defaults,
+                **battery_text_widget_defaults,
+                background=separators.background,
+                battery=0,
+            ),
+        ]
+
+    if monitor_info:
+        widgets += [
+            separators.next(right_looking=False),
+            widget.TextBox(
+                "CPU",
+                **widget_defaults,
+                background=separators.background,
+            ),
+            widget.CPUGraph(
+                **widget_defaults,
+                background=separators.background,
+                frequency=0.5,
+                samples=50,
+                border_width=0,
+                line_width=0,
+                fill_color=theme.highlight3,
+            ),
+            separators.next(right_looking=False),
+            widget.TextBox(
+                "RAM",
+                **widget_defaults,
+                background=separators.background,
+            ),
+            widget.MemoryGraph(
+                **widget_defaults,
+                background=separators.background,
+                frequency=0.5,
+                samples=50,
+                border_width=0,
+                line_width=0,
+                fill_color=theme.highlight2,
+            ),
+            separators.next(right_looking=False),
+            widget.TextBox(
+                "SWAP",
+                **widget_defaults,
+                background=separators.background,
+            ),
+            widget.SwapGraph(
+                **widget_defaults,
+                background=separators.background,
+                frequency=0.5,
+                samples=50,
+                border_width=0,
+                line_width=0,
+                fill_color=theme.alert0,
+            ),
+            separators.next(right_looking=False),
+            widget.TextBox(
+                "NET",
+                **widget_defaults,
+                background=separators.background,
+            ),
+            widget.NetGraph(
+                **widget_defaults,
+                background=separators.background,
+                frequency=0.5,
+                samples=50,
+                border_width=0,
+                line_width=0,
+                fill_color=theme.alert1,
+                margin_x=12,
+            ),
+        ]
+    widgets += [
+        widget.Spacer(
+            length=16,
+            background=separators.background
+        )
+    ]
+    return widgets
 
 
 wallpapers = Path(expanduser("~/wallpapers/"))
 wallpaper = choice(list(wallpapers.iterdir()))
 
+
+def single_screen_setup():
+    group_boxes = [
+        widget.GroupBox(
+            visible_groups="ASD",
+            **group_box_widget_defaults
+        ),
+        widget.GroupBox(
+            visible_groups="YXC",
+            **group_box_widget_defaults
+        ),
+    ]
+
+    return [
+        build_widgets(
+            group_boxes=group_boxes,
+            clock_format="%H:%M:%S %a %d.%m.%Y",
+            show_systray=True,
+            laptop_info=True,
+            monitor_info=True,
+        ),
+        [],
+        []
+    ]
+
+
+def triple_screen_setup():
+    return [
+        # Laptop screen, hidden
+        build_widgets(
+            group_boxes=[
+                widget.GroupBox(
+                    visible_groups="Z",
+                    **group_box_widget_defaults
+                )
+            ],
+            clock_format="%H:%M",
+            show_systray=False,
+            laptop_info=True,
+            monitor_info=False,
+        ),
+        # Left screen
+        build_widgets(
+            group_boxes=[
+                widget.GroupBox(
+                    visible_groups="ASD",
+                    **group_box_widget_defaults
+                )
+            ],
+            clock_format="%H:%M",
+            show_systray=True,
+            laptop_info=True,
+            monitor_info=False,
+        ),
+        # Right screen
+        build_widgets(
+            group_boxes=[
+                widget.GroupBox(
+                    visible_groups="YXC",
+                    **group_box_widget_defaults
+                )
+            ],
+            clock_format="%H:%M:%S %a %d.%m.%Y",
+            show_systray=False,
+            laptop_info=False,
+            monitor_info=True,
+        ),
+    ]
+
+
+def make_bar(widgets):
+    return bar.Bar(widgets, 36, margin=12)
+
+
+def make_screen(bar):
+    return Screen(
+        top=bar,
+        wallpaper=str(wallpaper.absolute()),
+        wallpaper_mode="fill"
+    )
+
+
+def select_screen_setup():
+    n_screens = int(
+        subprocess.run(
+            "xrandr --listmonitors | awk 'NR==1 {print $NF}'",
+            shell=True,
+            capture_output=True
+        ).stdout
+    )
+    if n_screens == 1:
+        return single_screen_setup()
+    else:
+        return triple_screen_setup()
+        subprocess.run("/home/pierre/.screenlayout/A209.sh")
+
+
 screens = [
-    Screen(
-        top=bar.Bar(
-            bar_widgets,
-            36,
-            margin=12,
-        ),
-        wallpaper=str(wallpaper.absolute()),
-        wallpaper_mode="fill",
-    ),
-    Screen(
-        top=bar.Bar(
-            external_screen_widgets("XYC"),
-            36,
-            margin=12,
-        ),
-        wallpaper=str(wallpaper.absolute()),
-        wallpaper_mode="fill",
-    ),
-    Screen(
-        top=bar.Bar(
-            external_screen_widgets("ASD"),
-            36,
-            margin=12,
-        ),
-        wallpaper=str(wallpaper.absolute()),
-        wallpaper_mode="fill",
-    ),
+    make_screen(make_bar(widgets)) for widgets in select_screen_setup()
 ]
