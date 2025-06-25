@@ -22,9 +22,9 @@ class SeparatorWriter:
         self.background = right_color
 
         arrow_char, background, foreground = (
-            ("\ue0b4", right_color, left_color)
+            ("\ue0b4 ", right_color, left_color)
             if right_looking
-            else ("\ue0b6", left_color, right_color)
+            else (" \ue0b6", left_color, right_color)
         )
 
         return widget.TextBox(
@@ -53,13 +53,16 @@ widget_defaults = dict(
     font="Victor Mono Semibold",
     foreground=theme.txt0,
     fontsize=18,
-    padding=6,
+    padding=0,
 )
 
-icon_defaults = widget_defaults.copy()
-icon_defaults["fontsize"] = 24
+icon_defaults = widget_defaults | dict(
+    fontsize=24,
+    width=30,
+    foreground=theme.bg4,
+)
 
-group_box_widget_defaults = icon_defaults | dict(
+group_box_widget_defaults = widget_defaults | dict(
     background=separators.background,
     fontsize=20,
     padding=12,
@@ -99,12 +102,6 @@ updates = widget.CheckUpdates(
     colour_have_updates=theme.alert1
 )
 
-systray = widget.Systray(
-    icon_size=24,
-    **widget_defaults,
-    background=separators.background,
-)
-
 
 def build_widgets(
     group_boxes: list,
@@ -116,21 +113,20 @@ def build_widgets(
     separators.reset()
 
     widgets = [
-        widget.Spacer(length=18, background=separators.background),
         *group_boxes,
         separators.next(right_looking=True),
-        widget.Spacer(
-            length=16,
-            background=separators.background,
-        ),
         widget.WindowName(
             **widget_defaults,
             background=separators.background,
             format="{name}"
         ),
         updates,
-        widget.Spacer(length=16, background=separators.background),
         separators.next(right_looking=False),
+        widget.TextBox(
+            "\uf017",
+            **icon_defaults,
+            background=separators.background,
+        ),
         widget.Clock(
             **widget_defaults,
             background=separators.background,
@@ -141,9 +137,9 @@ def build_widgets(
     if show_systray:
         widgets += [
             separators.next(right_looking=False),
-            systray,
-            widget.Spacer(
-                length=16,
+            widget.Systray(
+                icon_size=24,
+                **widget_defaults,
                 background=separators.background,
             ),
         ]
@@ -251,13 +247,19 @@ def build_widgets(
                 margin_x=12,
             ),
         ]
-    widgets += [
+
+    # Add spacers around to make room for the rounded edges
+    return [
+        widget.Spacer(
+            length=16,
+            background=separators.background
+        ),
+        *widgets,
         widget.Spacer(
             length=16,
             background=separators.background
         )
     ]
-    return widgets
 
 
 wallpapers = Path(expanduser("~/wallpapers/"))
